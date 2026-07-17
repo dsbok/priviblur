@@ -133,11 +133,11 @@ body {
     --color-post-tag-bg: #16161a;
     --color-post-tag-hover: #27272a;
 
-    --color-trail-post-separator: #ffffff;
+    --color-trail-post-separator: rgba(255, 255, 255, 0.2);
 
     --color-post-notes-viewer-nav-bar-bg: #16161a;
     --color-post-notes-viewer-nav-bar-item: #a1a1aa;
-    --color-reblog-note-separator: #ffffff;
+    --color-reblog-note-separator: rgba(255, 255, 255, 0.2);
 
     --color-primary-button-bg: #facc15;
     --color-primary-button-hover: #e4b60b;
@@ -158,7 +158,7 @@ body {
 
     --color-blog-header-blog-name: #a1a1aa;
     --color-setting-top-heading: #ffffff;
-    --color-setting-option-separator: #ffffff;
+    --color-setting-option-separator: rgba(255, 255, 255, 0.2);
     --color-setting-option: #ffffff;
     --color-setting-option-desc: #a1a1aa;
     --color-settings-theme-select-outline: #facc15;
@@ -232,7 +232,7 @@ a, a:visited, a:hover, a:active {
     align-items: center;
     justify-items: center;
     background: var(--color-top-level-card-bg);
-    border-bottom: 2px solid #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding: 20px 25px 0;
 }
 
