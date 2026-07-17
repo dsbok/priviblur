@@ -94,18 +94,18 @@ body {
 
     --color-nav-bar-icon: #a1a1aa;
     --color-nav-bar-icon-hover: rgba(255,255,255,0.08);
-    --color-nav-bar-selected-tab-highlight: #facc15;
+    --color-nav-bar-selected-tab-highlight: #ffffff;
     --color-search-icon-fill: #a1a1aa;
     --color-search-bar-bg: #16161a;
-    --color-logo: #facc15;
+    --color-logo: #ffffff;
 
     --color-footer-text: #a1a1aa;
 
     --color-community-label-text: #ffffff;
     --color-community-label-button-text: #000000;
-    --color-community-label-button-bg: #facc15;
+    --color-community-label-button-bg: #ffffff;
     --color-community-label-button-highlight: #ffffff;
-    --color-community-label-button-hover: #e4b60b;
+    --color-community-label-button-hover: #e4e4e7;
     --color-community-label-gradient-1: #16161a;
     --color-community-label-gradient-2: rgba(22,22,26,0.95);
 
@@ -121,12 +121,12 @@ body {
     --color-post-img-alt-text-widget-text: #ffffff;
 
     --color-poll-text-color: #ffffff;
-    --color-poll-winner-bg: #facc15;
+    --color-poll-winner-bg: rgba(255, 255, 255, 0.25);
     --color-poll-proportion-bar-bg: #27272a;
     --color-poll-choice-bg: #16161a;
 
-    --color-post-reveal-truncated-content-button: #facc15;
-    --color-post-reveal-truncated-content-button-hover: #ffffff;
+    --color-post-reveal-truncated-content-button: #ffffff;
+    --color-post-reveal-truncated-content-button-hover: #a1a1aa;
 
     --color-post-footer: #a1a1aa;
     --color-post-footer-post-interaction: #a1a1aa;
@@ -139,13 +139,13 @@ body {
     --color-post-notes-viewer-nav-bar-item: #a1a1aa;
     --color-reblog-note-separator: rgba(255, 255, 255, 0.2);
 
-    --color-primary-button-bg: #facc15;
-    --color-primary-button-hover: #e4b60b;
+    --color-primary-button-bg: #ffffff;
+    --color-primary-button-hover: #e4e4e7;
     --color-primary-button-text: #000000;
 
-    --color-secondary-button-bg: #ffffff;
-    --color-secondary-button-hover: #e4e4e7;
-    --color-button-secondary-text: #000000;
+    --color-secondary-button-bg: #2c2c2e;
+    --color-secondary-button-hover: #3a3a3c;
+    --color-button-secondary-text: #ffffff;
 
     --color-tertiary-button-color: #a1a1aa;
     
@@ -161,7 +161,7 @@ body {
     --color-setting-option-separator: rgba(255, 255, 255, 0.2);
     --color-setting-option: #ffffff;
     --color-setting-option-desc: #a1a1aa;
-    --color-settings-theme-select-outline: #facc15;
+    --color-settings-theme-select-outline: #ffffff;
     --color-settings-dropdown-option-bg: #16161a;
 
     --tumblr-signpost-bg: #16161a;
@@ -264,9 +264,8 @@ a.logo {
     border-radius: 0px;
     padding: 10px 10px;
     background: var(--color-search-bar-bg);
-    border: 1px solid #ffffff;
-    box-shadow: 2px 2px 0px #ffffff;
-    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+    border: 2px solid #ffffff;
+    transition: background-color 0.1s ease;
 }
 
 .search-bar input {
@@ -284,17 +283,7 @@ a.logo {
 
 .search-bar:focus-within {
     border-color: #ffffff;
-    background-color: #facc15;
-    box-shadow: 0px 0px 0px;
-    transform: translate(2px, 2px);
-}
-
-.search-bar:focus-within input {
-    color: #000000;
-}
-
-.search-bar:focus-within .icon path {
-    fill: #000000 !important;
+    background-color: #27272a;
 }
 
 .search-bar .icon path {
@@ -390,23 +379,12 @@ a.logo {
     letter-spacing: 0.3px;
     font-weight: 700;
     font-size: 14px;
-    border: 1px solid #ffffff;
+    border: 2px solid #ffffff;
     border-radius: 0px;
-    box-shadow: 2px 2px 0px #ffffff;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
     cursor: pointer;
     font-family: inherit;
     text-transform: uppercase;
-}
-
-.button:hover {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px;
-}
-
-.button:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .primary.button, a.primary.button {
@@ -415,7 +393,7 @@ a.logo {
 }
 
 .primary.button:hover {
-    background: var(--color-primary-button-bg);
+    background: #e4e4e7;
 }
 
 .secondary.button {
@@ -424,7 +402,7 @@ a.logo {
 }
 
 .secondary.button:hover {
-    background: var(--color-secondary-button-bg);
+    background: #3a3a3c;
 }
 
 .next-page {

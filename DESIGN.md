@@ -1,31 +1,31 @@
-# Design System: Priviblur (Industrial Brutalist Minimalist)
+# Design System: Priviblur (Minimalist Monochrome Brutalist)
 **Project ID:** dsbok/priviblur
 
 ## 1. Visual Theme & Atmosphere
-The layout follows an Industrial Brutalist Minimalist design. It features raw structural lines, sharp boxy geometry, flat offset mechanical shadows, and a high-contrast dark palette highlighted by safety warning yellow. The interface feels raw, heavy, and mechanical, optimizing for absolute responsiveness and zero-lag feedback.
+The layout follows a Minimalist Monochrome Brutalist theme. The design features flat, symmetric, sharp borders with zero box shadows, ensuring all card outlines are identical in thickness. Color is eliminated, relying purely on a high-contrast black, white, and gray scale. Spacing is structural, and interactions are clean and instant.
 
 ## 2. Color Palette & Roles
-Colors represent a raw, high-contrast industrial palette:
+Colors are strictly monochrome:
 
-* **Backdrop Concrete** (`#0e0e10` / `hsl(240, 10%, 6%)`): Dark iron backdrop.
-* **Structural Card BG** (`#16161a` / `hsl(240, 9%, 9%)`): Solid dark steel card container.
-* **Brutalist Accent / Warning Highlight** (`#facc15` / `hsl(48, 96%, 53%)`): Safety warning yellow, used for primary interactions, active tabs, and logo accents.
-* **Label Primary** (`#ffffff` / `hsl(0, 0%, 100%)`): Pure white text.
-* **Label Secondary** (`#a1a1aa` / `hsl(240, 5%, 65%)`): Concrete gray for timestamps, tags, and secondary metadata.
-* **Borders / Grid Lines** (`#ffffff` / `hsl(0, 0%, 100%)`): Solid white structural lines (`2px` thickness) to frame all cards, inputs, and buttons.
+* **System Canvas** (`#0e0e10` / `hsl(240, 10%, 6%)`): Dark iron canvas background.
+* **Card & Post BG** (`#16161a` / `hsl(240, 9%, 9%)`): Solid dark steel card container.
+* **Secondary Highlight / Active BG** (`#27272a` / `hsl(240, 5%, 15%)`): Grouped gray for input focus, active tabs, and hover states.
+* **Accent Highlight** (`#ffffff` / `hsl(0, 0%, 100%)`): Pure white, used for primary highlights, logo branding, and active tab highlights.
+* **Label Primary** (`#ffffff` / `hsl(0, 0%, 100%)`): High-contrast white for text.
+* **Label Secondary** (`#a1a1aa` / `hsl(240, 5%, 65%)`): Concrete gray for timestamps, tags, and metadata.
+* **Structural Borders** (`#ffffff` / `hsl(0, 0%, 100%)`): Solid white lines (`2px` thickness) framing all cards, buttons, and input fields. Zero box-shadows are used to maintain perfect symmetry.
 
 ## 3. Typography Rules
-* **Font Family:** Hybrid system monospace stack (`"SF Mono", "Fira Code", Menlo, Monaco, "Courier New", monospace`) combined with heavy sans-serif.
+* **Font Family:** System monospace stack (`"SF Mono", "Fira Code", Menlo, Monaco, "Courier New", monospace`).
 * **Weights:**
-  * Heavy (`800`) and Black (`900`) for headers, branding, and titles.
-  * Regular monospace (`400`) for post text.
-* **Letter Spacing:** Standard spacing for monospace; no rounding or tracking adjustments.
+  * Heavy (`800`) and Bold (`700`) for headers, branding, and titles.
+  * Regular (`400`) for post body copy.
 
 ## 4. Component Stylings
-* **Buttons**: Sharp rectangular blocks (`border-radius: 0px`) with a `2px solid #ffffff` border and a flat offset shadow (`box-shadow: 3px 3px 0px #ffffff`). Hovering translates the button (`transform: translate(3px, 3px)`) and collapses the shadow (`box-shadow: 0px 0px 0px`) to simulate a mechanical click.
-* **Cards/Containers**: Framed boxes (`border-radius: 0px`) with solid borders (`2px solid #ffffff`) and flat offset shadows (`box-shadow: 6px 6px 0px #ffffff`).
-* **Inputs & Search**: Rectangular input boxes (`border-radius: 0px`) with solid white borders and high-contrast yellow backgrounds on focus.
+* **Buttons**: Sharp rectangular blocks (`border-radius: 0px`) with a `2px solid #ffffff` border and zero box-shadow. Primary buttons use a solid white background with black text (`#000000`). Secondary buttons use a dark gray background (`rgba(255, 255, 255, 0.08)`) with white text.
+* **Cards/Containers**: Flat containers (`border-radius: 0px`) with `2px solid #ffffff` borders all around.
+* **Inputs & Search**: Boxy inputs (`border-radius: 0px`) with a `2px solid #ffffff` border, changing background to `#27272a` on focus.
 
 ## 5. Layout Principles
-* **Timeline Width**: Constrained to `640px` with rigid vertical borders.
-* **Mechanical Animations**: No smooth fades. Interactive elements use instant mechanical transitions (`transition: transform 0.1s ease, box-shadow 0.1s ease`).
+* **Timeline Containment**: Constrained to `640px` with symmetric frames.
+* **Zero Decoration**: All decorative blurs, gradients, and drop shadows are removed for a raw, high-contrast structural aesthetic.

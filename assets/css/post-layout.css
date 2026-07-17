@@ -63,8 +63,7 @@ a.inline-link, a.inline-mention {
 
 .link-block {
   border-radius: 0px;
-  border: 1px solid #ffffff;
-  box-shadow: 2px 2px 0px #ffffff;
+  border: 2px solid #ffffff;
   margin-bottom: 15px;
   color: var(--color-text);
   white-space: normal;
@@ -149,9 +148,8 @@ a.inline-link, a.inline-mention {
 }
 
 .poll-choice {
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 0px;
-  box-shadow: 2px 2px 0px #ffffff;
   color: var(--color-poll-text-color);
   background: var(--color-poll-choice-bg);
   padding: 8px 18px;

@@ -15,10 +15,8 @@
 
     background: var(--tumblr-signpost-bg);
     color: var(--color-text);
-    border: 1px solid #ffffff;
+    border: 2px solid #ffffff;
     border-radius: 0px;
-
-    box-shadow: 2px 2px 0px #ffffff;
   }
 
   .tumblr-signpost svg {

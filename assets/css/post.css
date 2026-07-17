@@ -5,8 +5,7 @@
   padding: 25px 25px;
   background: var(--color-top-level-card-bg);
   border-radius: 0px;
-  border: 1px solid #ffffff;
-  box-shadow: 3px 3px 0px #ffffff;
+  border: 2px solid #ffffff;
   width: 100%;
   box-sizing: border-box;
 }
@@ -185,9 +184,9 @@ a.hidden-reblog {
 }
 
 .post-tag:hover {
-  background: #facc15;
+  background: #ffffff;
   color: #000000;
-  border-color: #facc15;
+  border-color: #ffffff;
 }
 
 .post-interaction {
@@ -224,7 +223,7 @@ a.hidden-reblog {
 }
 
 .copy-link-btn:hover path {
-  fill: #facc15;
+  fill: #ffffff;
 }
 
 .copy-link-btn .copied-tooltip {
@@ -233,7 +232,7 @@ a.hidden-reblog {
   bottom: 120%;
   left: 50%;
   transform: translateX(-50%);
-  background: #facc15;
+  background: #ffffff;
   color: #000000;
   padding: 2px 6px;
   font-size: 10px;
@@ -323,8 +322,7 @@ a.hidden-reblog {
   flex-direction: column;
   gap: 25px;
   border-radius: 0px;
-  border: 1px solid #ffffff;
-  box-shadow: 3px 3px 0px #ffffff;
+  border: 2px solid #ffffff;
   padding: 15px 15px 25px;
 }
 
@@ -337,7 +335,7 @@ a.hidden-reblog {
   padding: 0 20px;
   background: var(--color-post-notes-viewer-nav-bar-bg);
   border-radius: 0px;
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
   margin: 0 15px;
 }
 
