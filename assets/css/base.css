@@ -68,22 +68,22 @@ body {
     --color-accent-2-150: hsl(7, 100%, 95%);
     --color-accent-2-100: hsl(7, 100%, 98%) ;
 
-    --color-dt-gray-900: hsl(41, 5%, 4%);
-    --color-dt-gray-800: hsl(41, 3%, 5%);
-    --color-dt-gray-700: hsl(41, 2%, 7%);
-    --color-dt-gray-600: hsl(41, 2%, 9%);
-    --color-dt-gray-575: hsl(41, 2%, 10.5%);
-    --color-dt-gray-550: hsl(41, 2%, 11%);
+    --color-dt-gray-900: hsl(41, 5%, 3%);
+    --color-dt-gray-800: hsl(41, 5%, 4%);
+    --color-dt-gray-700: hsl(41, 2%, 6%);
+    --color-dt-gray-600: hsl(41, 2%, 7%);
+    --color-dt-gray-575: hsl(41, 2%, 9%);
+    --color-dt-gray-550: hsl(41, 2%, 10.5%);
     --color-dt-gray-525: hsl(41, 2%, 12%);
-    --color-dt-gray-500: hsl(41, 3%, 13%);
-    --color-dt-gray-475: hsl(41, 4%, 14%);
-    --color-dt-gray-450: hsl(41, 4%, 16%);
-    --color-dt-gray-400: hsl(41, 3%, 19%);
-    --color-dt-gray-300: hsl(41, 4%, 25%);
-    --color-dt-gray-250: hsl(41, 3%, 40%);
-    --color-dt-gray-225: hsl(41, 3%, 50%);
-    --color-dt-gray-200: hsl(41, 5%, 60%);
-    --color-dt-gray-100: hsl(41, 7%, 80%);
+    --color-dt-gray-500: hsl(41, 3%, 15%);
+    --color-dt-gray-475: hsl(41, 4%, 18%);
+    --color-dt-gray-450: hsl(41, 4%, 20%);
+    --color-dt-gray-400: hsl(41, 3%, 24%);
+    --color-dt-gray-300: hsl(41, 4%, 30%);
+    --color-dt-gray-250: hsl(41, 3%, 45%);
+    --color-dt-gray-225: hsl(41, 3%, 55%);
+    --color-dt-gray-200: hsl(41, 5%, 65%);
+    --color-dt-gray-100: hsl(41, 7%, 85%);
 }
 
 /* Color definitions */
@@ -261,7 +261,9 @@ a.logo {
     width: 100%;
     border-radius: 25px;
     padding: 10px 10px;
-    background:var(--color-search-bar-bg);
+    background: var(--color-search-bar-bg);
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .search-bar input {
@@ -274,6 +276,11 @@ a.logo {
 
 .search-bar input:focus {
     outline: 0;
+}
+
+.search-bar:focus-within {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px hsla(36, 80%, 50%, 0.15);
 }
 
 .search-bar .icon path {
@@ -367,10 +374,21 @@ a.logo {
     display: inline-block;
     padding: 10px 15px;
     letter-spacing: 0.3px;
-    font-weight: 450;
+    font-weight: 500;
     font-size: 14px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 6px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+.button:active {
+    transform: translateY(0);
 }
 
 .primary.button, a.primary.button {
@@ -633,4 +651,20 @@ li.no-js .control-bar-dropdown-menu {
 
 .secondary.error.alert > .error-technical-details > summary::marker {
   content: ""
+}
+
+/* Custom scrollbar matching the dark theme */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-dt-gray-500);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-500);
 }
