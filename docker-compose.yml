@@ -4,36 +4,17 @@ services:
     container_name: priviblur
     restart: unless-stopped
     ports:
-      - "${PRIVIBLUR_PORT_BIND:-127.0.0.1:8000}:8000"
+      - "8000:8000" # Change to "127.0.0.1:8000:8000" if using reverse proxy
     environment:
       - PRIVIBLUR_DEPLOYMENT_HOST=0.0.0.0
       - PRIVIBLUR_DEPLOYMENT_PORT=8000
-      - PRIVIBLUR_DEPLOYMENT_DOMAIN=${PRIVIBLUR_DEPLOYMENT_DOMAIN:-}
-      - PRIVIBLUR_DEPLOYMENT_HTTPS=${PRIVIBLUR_DEPLOYMENT_HTTPS:-false}
-      - PRIVIBLUR_DEPLOYMENT_WORKERS=${PRIVIBLUR_DEPLOYMENT_WORKERS:-1}
-      - PRIVIBLUR_CACHE_URL=${PRIVIBLUR_CACHE_URL:-redis://priviblur-redis:6379}
-      - PRIVIBLUR_DEFAULT_USER_PREFERENCES_THEME=${PRIVIBLUR_DEFAULT_USER_PREFERENCES_THEME:-auto}
-      - PRIVIBLUR_DEFAULT_USER_PREFERENCES_LANGUAGE=${PRIVIBLUR_DEFAULT_USER_PREFERENCES_LANGUAGE:-en_US}
-      - PRIVIBLUR_LOGGING_SANIC_LOGGING_LEVEL=${PRIVIBLUR_LOGGING_SANIC_LOGGING_LEVEL:-50}
-      - PRIVIBLUR_LOGGING_PRIVIBLUR_LOGGING_LEVEL=${PRIVIBLUR_LOGGING_PRIVIBLUR_LOGGING_LEVEL:-30}
-      - PRIVIBLUR_LOGGING_PRIVIBLUR_EXTRACTOR_LOGGING_LEVEL=${PRIVIBLUR_LOGGING_PRIVIBLUR_EXTRACTOR_LOGGING_LEVEL:-30}
-      - PRIVIBLUR_MISC_DEV_MODE=${PRIVIBLUR_MISC_DEV_MODE:-false}
-
-  # Redis is technically optional but is used for caching (remember to configure PRIVIBLUR_CACHE_URL to actually make use of caching)
-  # Partially taken from https://github.com/zedeus/nitter/blob/b62d73dbd373f08af07c7a79efcd790d3bc1a49c/docker-compose.yml#L27-L44
-  priviblur-redis:
-    image: redis:6.2-alpine
-    container_name: priviblur-redis
-    command: redis-server --loglevel warning
-    volumes:
-      - priviblur-redis:/data
-    restart: unless-stopped
-    user: "999:1000"
-    read_only: true
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-
-volumes:
-  priviblur-redis:
+      - PRIVIBLUR_DEPLOYMENT_DOMAIN=
+      - PRIVIBLUR_DEPLOYMENT_HTTPS=false
+      - PRIVIBLUR_DEPLOYMENT_WORKERS=1
+      - PRIVIBLUR_DEFAULT_USER_PREFERENCES_THEME=auto
+      - PRIVIBLUR_DEFAULT_USER_PREFERENCES_LANGUAGE=en_US
+      - PRIVIBLUR_DEFAULT_USER_PREFERENCES_EXPAND_POSTS=false
+      - PRIVIBLUR_LOGGING_SANIC_LOGGING_LEVEL=50
+      - PRIVIBLUR_LOGGING_PRIVIBLUR_LOGGING_LEVEL=30
+      - PRIVIBLUR_LOGGING_PRIVIBLUR_EXTRACTOR_LOGGING_LEVEL=30
+      - PRIVIBLUR_MISC_DEV_MODE=false

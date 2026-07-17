@@ -43,7 +43,7 @@ You can install Priviblur through the official docker images here: https://quay.
 
 A compose file to use this image is provided in the repository.
 
-Configuration is then done by copying `.env.example` to `.env` and editing it. Alternatively, configuration can be done by creating/editing a `config.toml` based off the example config. See configuration section below.
+Configuration is then done by editing environment variables directly in `docker-compose.yml`. Alternatively, configuration can be done by creating/editing a `config.toml` based off the example config. See configuration section below.
 
 > [!TIP]
 > Priviblur **officially** only provide images of each stable release. For an image built off of master you can use the image provided by PussTheCat.org here: https://github.com/PussTheCat-org/docker-priviblur-quay
@@ -74,9 +74,8 @@ sanic src.server.app  --host 0.0.0.0  --worker <WORKERS>
 
 ## Configuration
 
-Configuration can be set via environment variables (e.g. using a `.env` file with Docker Compose) or using a `config.toml` file.
+Configuration can be set via environment variables (e.g. in `docker-compose.yml`) or using a `config.toml` file.
 
-- [.env.example](./.env.example)
 - [config.example.toml](./config.example.toml)
 
 ## Translations

@@ -101,13 +101,10 @@ def load_config(path: str) -> PriviblurConfig:
             env_var_name = f"PRIVIBLUR_{external_name.upper()}_{field_name.upper()}"
             env_val = os.environ.get(env_var_name)
 
-            # Common fallbacks / aliases for ease of use in docker-compose
             if env_val is None and external_name == "deployment" and field_name == "host":
                 env_val = os.environ.get("PRIVIBLUR_HOST")
             if env_val is None and external_name == "deployment" and field_name == "port":
                 env_val = os.environ.get("PRIVIBLUR_PORT")
-            if env_val is None and external_name == "cache" and field_name == "url":
-                env_val = os.environ.get("REDIS_URL") or os.environ.get("PRIVIBLUR_REDIS_URL")
 
             if env_val is not None:
                 field_type = section_object.__annotations__.get(field_name)
