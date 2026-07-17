@@ -1,31 +1,31 @@
-# Design System: Priviblur
+# Design System: Priviblur (Apple HIG)
 **Project ID:** dsbok/priviblur
 
 ## 1. Visual Theme & Atmosphere
-Priviblur uses an immersive "Deep Space" dark mode approach. The atmosphere is dense, clean, and highly futuristic, pairing deep dark slate surfaces with vibrant neon Indigo accents. This ensures high-contrast readability, absolute zero-lag visual feedback, and a premium web application presence.
+Priviblur's visual theme follows the Apple Human Interface Guidelines (HIG) for macOS/iOS Dark Mode. The interface relies on pure black backdrop surfaces, flat nested containers with subtle border separation, system-level typography, and clean contrast. Spacing is comfortable, interactions are micro-animated, and frosted glass elements are used to convey layer depth.
 
 ## 2. Color Palette & Roles
-The layout uses HSL-crafted dark mode gradients:
+Colors correspond to Apple's native Dark Mode system palette:
 
-* **Primary Background** (`#07080a` / `hsl(220, 25%, 3%)`): Deep space dark canvas focusing user focus entirely on content.
-* **Card & Post Container Background** (`#0f1115` / `hsl(220, 18%, 7%)`): Dark slate gray, enclosing post contents.
-* **Secondary Highlight/Hover** (`#181c24` / `hsl(220, 18%, 11%)`): Sleek hover fill for interactive components and background inputs.
-* **Primary Accent** (`#6366f1` / `hsl(238, 83%, 66%)`): Vibrant electric indigo for logos, active state indicator highlights, and prominent CTA actions.
-* **Primary Text** (`#f1f3f5` / `hsl(210, 17%, 95%)`): Off-white for clean contrast and zero eye fatigue.
-* **Secondary Text** (`#9ca3af` / `hsl(220, 9%, 65%)`): Muted gray for timestamps, tags, and secondary metadata descriptions.
+* **System Background** (`#000000` / `hsl(0, 0%, 0%)`): Pure black backdrop for absolute contrast and OLED power saving.
+* **Secondary Grouped Background (Card BG)** (`#1c1c1e` / `hsl(240, 6%, 10%)`): Apple's system gray, used to group post content blocks.
+* **Tertiary Grouped Background (Input BG)** (`#2c2c2e` / `hsl(240, 5%, 15%)`): Lighter system gray for search inputs and hover states.
+* **System Blue (Primary Accent)** (`#0a84ff` / `hsl(211, 100%, 52%)`): Active navigation tabs, link indicators, and primary call-to-action buttons.
+* **Label Primary** (`#ffffff` / `hsl(0, 0%, 100%)`): Pure white for body and primary text.
+* **Label Secondary** (`#8e8e93` / `hsl(240, 2%, 56%)`): Apple system gray for secondary metadata, timestamps, and tag descriptions.
 
 ## 3. Typography Rules
-* **Font Family:** Modern typography stack (`"Inter", system-ui, -apple-system, sans-serif`).
+* **Font Family:** Apple's system font stack (`-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", sans-serif`).
 * **Weights:**
-  * Bold (`700`): Headers, blog branding, and post titles.
-  * Medium (`500`): Interactive buttons, tabs, and tag elements.
-  * Regular (`400`): Timeline descriptions, body copy, and comments.
+  * Semibold (`600`): Used for header typography, title metadata, and buttons.
+  * Regular (`400`): Used for main body text, reblog comments, and descriptions.
+* **Letter Spacing:** Balanced system tracking (`letter-spacing: -0.1px` on body and titles) to emulate SF Pro font characteristics.
 
 ## 4. Component Stylings
-* **Buttons**: Rounded buttons (`border-radius: 6px`) with active scale-in transitions (`transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1)`).
-* **Cards/Containers**: Framed with rounded corners (`border-radius: 12px`), borders (`1px solid rgba(255, 255, 255, 0.05)`), and a smooth hover float transition.
-* **Search & Form Inputs**: Curved input capsules using custom inset backgrounds and neon-indigo focus highlights (`box-shadow: 0 0 0 3px hsla(238, 83%, 66%, 0.15)`).
+* **Buttons**: Rounded buttons with a clean corner radius (`border-radius: 8px`). Primary buttons use System Blue (`#0a84ff`) background with white text, and secondary buttons use System Gray (`#2c2c2e`).
+* **Cards/Containers**: Apple-style nested containers with a corner radius (`border-radius: 12px`), minimal subtle border strokes (`1px solid rgba(255, 255, 255, 0.08)`), and flat elevation (no shadows).
+* **Inputs & Search Bars**: Smooth pill-shaped/curved containers (`border-radius: 10px`) utilizing `#2c2c2e` backgrounds.
 
 ## 5. Layout Principles
-* **Timeline Constraint**: Kept centered at `640px` maximum width.
-* **Whitespace**: Balanced padding sizes (`16px` mobile, `24px` desktop) to maintain high density without layout collision.
+* **Timeline Containment**: Constrained to a standard content width of `640px`.
+* **Margins & Insets**: Consistent spacing margins (`16px` mobile, `24px` desktop) following standard Apple padding grids.

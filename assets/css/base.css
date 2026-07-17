@@ -88,87 +88,87 @@ body {
 
 /* Color definitions */
 body {
-    --color-background: #07080a;
-    --color-top-level-card-bg: #0f1115;
-    --color-text: #f1f3f5;
+    --color-background: #000000;
+    --color-top-level-card-bg: #1c1c1e;
+    --color-text: #ffffff;
 
-    --color-nav-bar-icon: #9ca3af;
-    --color-nav-bar-icon-hover: rgba(255,255,255,0.08);
-    --color-nav-bar-selected-tab-highlight: #6366f1;
-    --color-search-icon-fill: #6b7280;
-    --color-search-bar-bg: #15181f;
-    --color-logo: #6366f1;
+    --color-nav-bar-icon: #8e8e93;
+    --color-nav-bar-icon-hover: rgba(255,255,255,0.06);
+    --color-nav-bar-selected-tab-highlight: #0a84ff;
+    --color-search-icon-fill: #8e8e93;
+    --color-search-bar-bg: #2c2c2e;
+    --color-logo: #0a84ff;
 
-    --color-footer-text: #6b7280;
+    --color-footer-text: #8e8e93;
 
-    --color-community-label-text: #f1f3f5;
-    --color-community-label-button-text: #f1f3f5;
-    --color-community-label-button-bg: #1f2937;
-    --color-community-label-button-highlight: #374151;
-    --color-community-label-button-hover: rgba(255,255,255,0.08);
-    --color-community-label-gradient-1: #0f1115;
-    --color-community-label-gradient-2: rgba(15,17,21,0.9);
+    --color-community-label-text: #ffffff;
+    --color-community-label-button-text: #ffffff;
+    --color-community-label-button-bg: #2c2c2e;
+    --color-community-label-button-highlight: #3a3a3c;
+    --color-community-label-button-hover: rgba(255,255,255,0.06);
+    --color-community-label-gradient-1: #1c1c1e;
+    --color-community-label-gradient-2: rgba(28,28,30,0.9);
 
-    --color-post-blog-name: #f1f3f5;
-    --color-reblog-attribution: #9ca3af;
-    --color-post-link-block-subtitle: #9ca3af;
-    --color-post-header-date-separator: #6b7280;
+    --color-post-blog-name: #ffffff;
+    --color-reblog-attribution: #8e8e93;
+    --color-post-link-block-subtitle: #8e8e93;
+    --color-post-header-date-separator: #8e8e93;
 
-    --color-ask-header: #d1d5db;
-    --color-ask-bg: #15181f;
+    --color-ask-header: #ffffff;
+    --color-ask-bg: #2c2c2e;
 
-    --color-post-img-alt-text-widget-bg: #15181f;
-    --color-post-img-alt-text-widget-text: #f1f3f5;
+    --color-post-img-alt-text-widget-bg: #2c2c2e;
+    --color-post-img-alt-text-widget-text: #ffffff;
 
-    --color-poll-text-color: #f1f3f5;
-    --color-poll-winner-bg: #4338ca;
-    --color-poll-proportion-bar-bg: #374151;
-    --color-poll-choice-bg: #1f2937;
+    --color-poll-text-color: #ffffff;
+    --color-poll-winner-bg: #0a84ff;
+    --color-poll-proportion-bar-bg: #3a3a3c;
+    --color-poll-choice-bg: #2c2c2e;
 
-    --color-post-reveal-truncated-content-button: #6366f1;
-    --color-post-reveal-truncated-content-button-hover: #4f46e5;
+    --color-post-reveal-truncated-content-button: #0a84ff;
+    --color-post-reveal-truncated-content-button-hover: #0071e3;
 
-    --color-post-footer: #9ca3af;
-    --color-post-footer-post-interaction: #9ca3af;
-    --color-post-tag-bg: #15181f;
-    --color-post-tag-hover: #1e2330;
+    --color-post-footer: #8e8e93;
+    --color-post-footer-post-interaction: #8e8e93;
+    --color-post-tag-bg: #2c2c2e;
+    --color-post-tag-hover: #3a3a3c;
 
-    --color-trail-post-separator: rgba(255, 255, 255, 0.06);
+    --color-trail-post-separator: rgba(255, 255, 255, 0.08);
 
-    --color-post-notes-viewer-nav-bar-bg: #15181f;
-    --color-post-notes-viewer-nav-bar-item: #9ca3af;
-    --color-reblog-note-separator: rgba(255, 255, 255, 0.06);
+    --color-post-notes-viewer-nav-bar-bg: #2c2c2e;
+    --color-post-notes-viewer-nav-bar-item: #8e8e93;
+    --color-reblog-note-separator: rgba(255, 255, 255, 0.08);
 
-    --color-primary-button-bg: #6366f1;
-    --color-primary-button-hover: #4f46e5;
+    --color-primary-button-bg: #0a84ff;
+    --color-primary-button-hover: #0071e3;
     --color-primary-button-text: #ffffff;
 
-    --color-secondary-button-bg: #1c1f26;
-    --color-secondary-button-hover: #282c37;
-    --color-button-secondary-text: #f1f3f5;
+    --color-secondary-button-bg: #2c2c2e;
+    --color-secondary-button-hover: #3a3a3c;
+    --color-button-secondary-text: #ffffff;
 
-    --color-tertiary-button-color: #9ca3af;
+    --color-tertiary-button-color: #8e8e93;
     
-    --color-dropdown-menu-bg: #0f1115;
-    --color-dropdown-action-select: #1c1f26;
-    --color-dropdown-action-hover: #1c1f26;
-    --color-control-bar-action-text: #9ca3af;
-    --color-dropdown-menu-item-selected: #1c1f26;
-    --color-dropdown-menu-item-hover: #1e2330;
+    --color-dropdown-menu-bg: #1c1c1e;
+    --color-dropdown-action-select: #2c2c2e;
+    --color-dropdown-action-hover: #2c2c2e;
+    --color-control-bar-action-text: #8e8e93;
+    --color-dropdown-menu-item-selected: #2c2c2e;
+    --color-dropdown-menu-item-hover: #3a3a3c;
 
-    --color-blog-header-blog-name: #9ca3af;
-    --color-setting-top-heading: #f1f3f5;
-    --color-setting-option-separator: rgba(255, 255, 255, 0.06);
-    --color-setting-option: #f1f3f5;
-    --color-setting-option-desc: #9ca3af;
-    --color-settings-theme-select-outline: #6366f1;
-    --color-settings-dropdown-option-bg: #15181f;
+    --color-blog-header-blog-name: #8e8e93;
+    --color-setting-top-heading: #ffffff;
+    --color-setting-option-separator: rgba(255, 255, 255, 0.08);
+    --color-setting-option: #ffffff;
+    --color-setting-option-desc: #8e8e93;
+    --color-settings-theme-select-outline: #0a84ff;
+    --color-settings-dropdown-option-bg: #2c2c2e;
 
-    --tumblr-signpost-bg: #0f1115;
+    --tumblr-signpost-bg: #1c1c1e;
     --tumblr-signpost-border: rgba(255, 255, 255, 0.08);
 
-    --color-alert-show-error-details: #9ca3af;
-    --color-alert-show-error-details-hover: #f1f3f5;
+    --color-alert-show-error-details: #8e8e93;
+    --color-alert-show-error-details-hover: #ffffff;
 }
 
 html, body, .container {
@@ -280,7 +280,7 @@ a.logo {
 
 .search-bar:focus-within {
     border-color: var(--color-primary-500);
-    box-shadow: 0 0 0 3px hsla(36, 80%, 50%, 0.15);
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
 }
 
 .search-bar .icon path {
@@ -377,7 +377,7 @@ a.logo {
     font-weight: 500;
     font-size: 14px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 }
