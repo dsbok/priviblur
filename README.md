@@ -28,11 +28,11 @@ python -m src.server
 
 Configure options by setting environment variables in `docker-compose.yml` or your system environment:
 
-- `PRIVIBLUR_DEPLOYMENT_HOST`: Host to bind to (default: `127.0.0.1`)
+- `PRIVIBLUR_DEPLOYMENT_HOST`: Host to bind to (default: `0.0.0.0`)
 - `PRIVIBLUR_DEPLOYMENT_PORT`: Internal port to listen on (default: `8000`), must be same as in docker-compose.yml right port
 - `PRIVIBLUR_DEPLOYMENT_DOMAIN`: Domain name of the instance
 - `PRIVIBLUR_DEPLOYMENT_HTTPS`: Force HTTPS cookies/links
-- `PRIVIBLUR_DEPLOYMENT_WORKERS`: Number of worker instances
+- `PRIVIBLUR_DEPLOYMENT_WORKERS`: Number of worker instances (speedup loading)
 - `PRIVIBLUR_DEFAULT_USER_PREFERENCES_THEME`: Default UI theme (auto, light, dark)
 - `PRIVIBLUR_DEFAULT_USER_PREFERENCES_LANGUAGE`: Default language code
 
