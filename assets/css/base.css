@@ -88,86 +88,86 @@ body {
 
 /* Color definitions */
 body {
-    --color-background: #000000;
-    --color-top-level-card-bg: rgba(28, 28, 30, 0.75);
+    --color-background: #0e0e10;
+    --color-top-level-card-bg: #16161a;
     --color-text: #ffffff;
 
-    --color-nav-bar-icon: #8e8e93;
-    --color-nav-bar-icon-hover: rgba(255,255,255,0.06);
-    --color-nav-bar-selected-tab-highlight: #ffffff;
-    --color-search-icon-fill: #8e8e93;
-    --color-search-bar-bg: rgba(44, 44, 46, 0.75);
-    --color-logo: #ffffff;
+    --color-nav-bar-icon: #a1a1aa;
+    --color-nav-bar-icon-hover: rgba(255,255,255,0.08);
+    --color-nav-bar-selected-tab-highlight: #facc15;
+    --color-search-icon-fill: #a1a1aa;
+    --color-search-bar-bg: #16161a;
+    --color-logo: #facc15;
 
-    --color-footer-text: #8e8e93;
+    --color-footer-text: #a1a1aa;
 
     --color-community-label-text: #ffffff;
-    --color-community-label-button-text: #ffffff;
-    --color-community-label-button-bg: #2c2c2e;
-    --color-community-label-button-highlight: #3a3a3c;
-    --color-community-label-button-hover: rgba(255,255,255,0.06);
-    --color-community-label-gradient-1: #1c1c1e;
-    --color-community-label-gradient-2: rgba(28,28,30,0.9);
+    --color-community-label-button-text: #000000;
+    --color-community-label-button-bg: #facc15;
+    --color-community-label-button-highlight: #ffffff;
+    --color-community-label-button-hover: #e4b60b;
+    --color-community-label-gradient-1: #16161a;
+    --color-community-label-gradient-2: rgba(22,22,26,0.95);
 
     --color-post-blog-name: #ffffff;
-    --color-reblog-attribution: #8e8e93;
-    --color-post-link-block-subtitle: #8e8e93;
-    --color-post-header-date-separator: #8e8e93;
+    --color-reblog-attribution: #a1a1aa;
+    --color-post-link-block-subtitle: #a1a1aa;
+    --color-post-header-date-separator: #a1a1aa;
 
     --color-ask-header: #ffffff;
-    --color-ask-bg: rgba(44, 44, 46, 0.75);
+    --color-ask-bg: #16161a;
 
-    --color-post-img-alt-text-widget-bg: rgba(44, 44, 46, 0.75);
+    --color-post-img-alt-text-widget-bg: #16161a;
     --color-post-img-alt-text-widget-text: #ffffff;
 
     --color-poll-text-color: #ffffff;
-    --color-poll-winner-bg: rgba(255, 255, 255, 0.25);
-    --color-poll-proportion-bar-bg: rgba(58, 58, 60, 0.8);
-    --color-poll-choice-bg: rgba(44, 44, 46, 0.6);
+    --color-poll-winner-bg: #facc15;
+    --color-poll-proportion-bar-bg: #27272a;
+    --color-poll-choice-bg: #16161a;
 
-    --color-post-reveal-truncated-content-button: #ffffff;
-    --color-post-reveal-truncated-content-button-hover: #8e8e93;
+    --color-post-reveal-truncated-content-button: #facc15;
+    --color-post-reveal-truncated-content-button-hover: #ffffff;
 
-    --color-post-footer: #8e8e93;
-    --color-post-footer-post-interaction: #8e8e93;
-    --color-post-tag-bg: rgba(44, 44, 46, 0.6);
-    --color-post-tag-hover: rgba(58, 58, 60, 0.8);
+    --color-post-footer: #a1a1aa;
+    --color-post-footer-post-interaction: #a1a1aa;
+    --color-post-tag-bg: #16161a;
+    --color-post-tag-hover: #27272a;
 
-    --color-trail-post-separator: rgba(255, 255, 255, 0.08);
+    --color-trail-post-separator: #ffffff;
 
-    --color-post-notes-viewer-nav-bar-bg: rgba(44, 44, 46, 0.75);
-    --color-post-notes-viewer-nav-bar-item: #8e8e93;
-    --color-reblog-note-separator: rgba(255, 255, 255, 0.08);
+    --color-post-notes-viewer-nav-bar-bg: #16161a;
+    --color-post-notes-viewer-nav-bar-item: #a1a1aa;
+    --color-reblog-note-separator: #ffffff;
 
-    --color-primary-button-bg: #ffffff;
-    --color-primary-button-hover: #e5e5ea;
+    --color-primary-button-bg: #facc15;
+    --color-primary-button-hover: #e4b60b;
     --color-primary-button-text: #000000;
 
-    --color-secondary-button-bg: #2c2c2e;
-    --color-secondary-button-hover: #3a3a3c;
-    --color-button-secondary-text: #ffffff;
+    --color-secondary-button-bg: #ffffff;
+    --color-secondary-button-hover: #e4e4e7;
+    --color-button-secondary-text: #000000;
 
-    --color-tertiary-button-color: #8e8e93;
+    --color-tertiary-button-color: #a1a1aa;
     
-    --color-dropdown-menu-bg: rgba(28, 28, 30, 0.95);
-    --color-dropdown-action-select: rgba(44, 44, 46, 0.75);
-    --color-dropdown-action-hover: rgba(44, 44, 46, 0.75);
-    --color-control-bar-action-text: #8e8e93;
-    --color-dropdown-menu-item-selected: rgba(44, 44, 46, 0.75);
-    --color-dropdown-menu-item-hover: rgba(58, 58, 60, 0.8);
+    --color-dropdown-menu-bg: #16161a;
+    --color-dropdown-action-select: #16161a;
+    --color-dropdown-action-hover: #27272a;
+    --color-control-bar-action-text: #a1a1aa;
+    --color-dropdown-menu-item-selected: #27272a;
+    --color-dropdown-menu-item-hover: #27272a;
 
-    --color-blog-header-blog-name: #8e8e93;
+    --color-blog-header-blog-name: #a1a1aa;
     --color-setting-top-heading: #ffffff;
-    --color-setting-option-separator: rgba(255, 255, 255, 0.08);
+    --color-setting-option-separator: #ffffff;
     --color-setting-option: #ffffff;
-    --color-setting-option-desc: #8e8e93;
-    --color-settings-theme-select-outline: #ffffff;
-    --color-settings-dropdown-option-bg: rgba(44, 44, 46, 0.75);
+    --color-setting-option-desc: #a1a1aa;
+    --color-settings-theme-select-outline: #facc15;
+    --color-settings-dropdown-option-bg: #16161a;
 
-    --tumblr-signpost-bg: rgba(28, 28, 30, 0.75);
-    --tumblr-signpost-border: rgba(255, 255, 255, 0.08);
+    --tumblr-signpost-bg: #16161a;
+    --tumblr-signpost-border: #ffffff;
 
-    --color-alert-show-error-details: #8e8e93;
+    --color-alert-show-error-details: #a1a1aa;
     --color-alert-show-error-details-hover: #ffffff;
 }
 
@@ -176,9 +176,10 @@ html, body, .container {
 }
 
 body {
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: "SF Mono", "Fira Code", Menlo, Monaco, "Courier New", monospace;
     font-size: 14px;
-    background: var(--color-background);
+    background-color: var(--color-background);
+    color: var(--color-text);
     margin: 0;
 }
 
@@ -230,10 +231,8 @@ a, a:visited, a:hover, a:active {
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    background: rgba(28, 28, 30, 0.75);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--color-top-level-card-bg);
+    border-bottom: 2px solid #ffffff;
     padding: 20px 25px 0;
 }
 
@@ -262,11 +261,12 @@ a.logo {
 .search-bar {
     display: flex;
     width: 100%;
-    border-radius: 25px;
+    border-radius: 0px;
     padding: 10px 10px;
     background: var(--color-search-bar-bg);
-    border: 1px solid transparent;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid #ffffff;
+    box-shadow: 3px 3px 0px #ffffff;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
 }
 
 .search-bar input {
@@ -275,6 +275,7 @@ a.logo {
     border: 0;
     color: var(--color-text);
     background: none;
+    font-family: inherit;
 }
 
 .search-bar input:focus {
@@ -282,8 +283,18 @@ a.logo {
 }
 
 .search-bar:focus-within {
-    border-color: var(--color-primary-500);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    background-color: #facc15;
+    box-shadow: 0px 0px 0px;
+    transform: translate(3px, 3px);
+}
+
+.search-bar:focus-within input {
+    color: #000000;
+}
+
+.search-bar:focus-within .icon path {
+    fill: #000000 !important;
 }
 
 .search-bar .icon path {
@@ -377,32 +388,34 @@ a.logo {
     display: inline-block;
     padding: 10px 15px;
     letter-spacing: 0.3px;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 14px;
-    border: 0;
-    border-radius: 8px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid #ffffff;
+    border-radius: 0px;
+    box-shadow: 3px 3px 0px #ffffff;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
     cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
 }
 
 .button:hover {
-    opacity: 0.95;
-    transform: translateY(-1px);
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px;
 }
 
 .button:active {
-    transform: translateY(0);
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px;
 }
 
 .primary.button, a.primary.button {
     color: var(--color-primary-button-text);
     background: var(--color-primary-button-bg);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
 }
 
 .primary.button:hover {
-    background: var(--color-primary-button-hover);
-    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+    background: var(--color-primary-button-bg);
 }
 
 .secondary.button {
@@ -411,7 +424,7 @@ a.logo {
 }
 
 .secondary.button:hover {
-    background-color: var(--color-secondary-button-hover);
+    background: var(--color-secondary-button-bg);
 }
 
 .next-page {
