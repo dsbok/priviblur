@@ -365,12 +365,29 @@ a.logo {
 
 .button {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 24px;
     letter-spacing: 0.3px;
-    font-weight: 450;
+    font-weight: 500;
     font-size: 14px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 100px;
+}
+
+.pagination-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+    padding: 0 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pagination-bar .page-number {
+    font-weight: bold;
+    color: var(--color-text);
+    padding: 0 10px;
 }
 
 .primary.button, a.primary.button {

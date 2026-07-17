@@ -109,14 +109,27 @@ def create_reblog_attribution_link(post):
     )
 
 
-def update_query_params(base_query_args, key, value):
+def update_query_params(base_query_args, key, value=None):
     """Returns a URL query string with a parameter replaced/added"""
-    base_query_args = copy.copy(base_query_args)
-
-    if isinstance(value, Sequence):
-        base_query_args[key] = value
+    if isinstance(base_query_args, str):
+        base_query_args = urllib.parse.parse_qs(base_query_args)
     else:
-        base_query_args[key] = [value]
+        try:
+            base_query_args = dict(base_query_args)
+        except Exception:
+            base_query_args = copy.copy(base_query_args)
+
+    if isinstance(key, dict):
+        for k, v in key.items():
+            if isinstance(v, (list, tuple)):
+                base_query_args[k] = v
+            else:
+                base_query_args[k] = [v]
+    else:
+        if isinstance(value, (list, tuple)):
+            base_query_args[key] = value
+        else:
+            base_query_args[key] = [value]
 
     return urllib.parse.urlencode(base_query_args, doseq=True)
 

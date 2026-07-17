@@ -19,10 +19,56 @@
 
     {{insert_content_list("timeline", timeline.elements)}}
 
-    {%- if timeline.next %}
+    {%- if timeline.next or (request.args.get("p", "1") | int) > 1 %}
         <div class="paging">
             {%- block paging -%}
-                <a class="primary next-page button" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}#m">{{translate(request.ctx.language, "pagination_next_page")}}</a>
+                {% set page = (request.args.get("p", "1") | int) %}
+                {% set history = request.args.get("history", "") %}
+                {% set current_cursor = request.args.get("continuation", "") %}
+
+                {# Construct next history list #}
+                {% if current_cursor %}
+                    {% if history %}
+                        {% set next_history = history + "," + current_cursor %}
+                    {% else %}
+                        {% set next_history = current_cursor %}
+                    {% endif %}
+                {% elif page == 1 %}
+                    {% set next_history = "first_page" %}
+                {% else %}
+                    {% set next_history = history %}
+                {% endif %}
+
+                {# Construct prev continuation cursor from history #}
+                {% set history_list = history.split(",") if history else [] %}
+                {% set prev_cursor = "" %}
+                {% if history_list | length > 0 %}
+                    {% set last_history = history_list[-1] %}
+                    {% if last_history != "first_page" %}
+                        {% set prev_cursor = last_history %}
+                    {% endif %}
+                    {% set prev_history_list = history_list[:-1] %}
+                    {% set prev_history = prev_history_list | join(",") %}
+                {% else %}
+                    {% set prev_history = "" %}
+                {% endif %}
+
+                <div class="pagination-bar">
+                    {% if page > 1 %}
+                        <a class="secondary button" href="{{request.path}}?{{request.args | update_query_params({'p': 1, 'continuation': '', 'history': ''})}}#m">First</a>
+                        {% if page == 2 %}
+                            <a class="secondary button" href="{{request.path}}?{{request.args | update_query_params({'p': 1, 'continuation': '', 'history': ''})}}#m">« Prev</a>
+                        {% else %}
+                            <a class="secondary button" href="{{request.path}}?{{request.args | update_query_params({'continuation': prev_cursor, 'p': page - 1, 'history': prev_history})}}#m">« Prev</a>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <span class="page-number">Page {{page}}</span>
+                    
+                    {% if timeline.next %}
+                        <a class="primary button" href="{{request.path}}?{{request.args | update_query_params({'continuation': timeline.next.cursor, 'p': page + 1, 'history': next_history})}}#m">Next »</a>
+                    {% endif %}
+                </div>
             {%- endblock -%}
         </div>
     {% endif %}
