@@ -44,10 +44,12 @@ class TumblrAPI:
                     auth_override = f"Bearer {auth_override}"
                 headers["authorization"] = auth_override
 
+            connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=300, limit=100)
             client = aiohttp.ClientSession(
                 "https://www.tumblr.com",
                 headers=headers,
-                timeout=main_request_timeout,  # TODO allow fine-tuning the different types of timeouts
+                timeout=main_request_timeout,
+                connector=connector,
             )
 
         return cls(client, json_loads)
@@ -56,6 +58,7 @@ class TumblrAPI:
         """Initializes a TumblrAPI instance with the given client"""
         self.client = client
         self.json_loader = json_loads
+        self._blog_post_cache = {}
 
     async def _get_json(self, endpoint, url_params=None):
         """Internal method that does the actual request to Tumblr"""
@@ -338,11 +341,22 @@ class TumblrAPI:
             blog_name: the blog the post is from
             post_id: the id of the post
         """
+        import time
+        cache_key = (blog_name, str(post_id))
+        if cache_key in self._blog_post_cache:
+            timestamp, result = self._blog_post_cache[cache_key]
+            if time.time() - timestamp < 300:
+                return result
 
-        return await self._get_json(
+        result = await self._get_json(
             f"blog/{urllib.parse.quote(blog_name, safe='')}/posts/{post_id}/permalink",
             url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": "true"},
         )
+
+        if len(self._blog_post_cache) > 500:
+            self._blog_post_cache.clear()
+        self._blog_post_cache[cache_key] = (time.time(), result)
+        return result
 
     async def blog_post_replies(
         self, blog_id, post_id, latest: bool = False, after_id: Optional[str] = None
