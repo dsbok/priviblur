@@ -3,7 +3,7 @@
         <a href="/{{post_url}}?note_viewer={{element.default_note_viewer_tab}}"> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale=request.ctx.language)) }}</a>
     </div>
     <div class="interaction-buttons">
-        <button class="copy-link-btn" onclick="navigator.clipboard.writeText(window.location.origin + '/{{post_url}}').then(() => { this.setAttribute('data-copied', 'true'); setTimeout(() => this.removeAttribute('data-copied'), 1500); })">
+        <button class="copy-link-btn" onclick="copyTextToClipboard(window.location.origin + '/{{post_url}}', this)">
             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
                 <title>Copy Link</title>
                 <path d="M360-240q-29.7 0-50.85-21.15Q288-282.3 288-312v-480q0-29.7 21.15-50.85Q330.3-864 360-864h360q29.7 0 50.85 21.15Q792-821.7 792-792v480q0-29.7-21.15 50.85Q749.7-240 720-240H360Zm0-72h360v-480H360v480ZM240-120q-29.7 0-50.85-21.15Q168-162.3 168-192v-480h72v480h360v72H240Zm120-192v-480 480Z"/>
