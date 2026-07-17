@@ -1,4 +1,4 @@
-from . import explore, media, search, tagged, blogs, assets, miscellaneous, api, settings
+from . import explore, media, search, tagged, blogs, assets, miscellaneous, api
 
 BLUEPRINTS = (
     explore.explore,
@@ -8,6 +8,5 @@ BLUEPRINTS = (
     blogs.blogs_group,
     assets.assets,
     miscellaneous.miscellaneous,
-    settings.settings,
     api.api,
 )

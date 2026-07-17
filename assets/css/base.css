@@ -5,12 +5,7 @@
     --OFF: ;
 }
 
-.default-theme, .light-theme {
-    --light: var(--ON);
-    --dark: var(--OFF);
-}
-
-.dark-theme {
+.default-theme, .light-theme, .dark-theme {
     --light: var(--OFF);
     --dark: var(--ON);
 }

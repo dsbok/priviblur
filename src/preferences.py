@@ -20,13 +20,11 @@ class UserPreferences:
 
     def __post_init__(self):
         """Validates default user attribute values"""
-        # Silently fallback when the language given is invalid
-        # TODO raise error to the end-user and instance maintainer when necessary
-        if self.language not in SUPPORTED_LANGUAGES:
-            self.language = "en_US"
+        self.language = "en_US"
+        self.expand_posts = True
 
-        if self.theme not in ("auto", "light", "dark"):
-            self.theme = "auto"
+        if self.theme not in ("auto", "dark"):
+            self.theme = "dark"
 
     def replace_from_forms(self, request) -> "UserPreferences":
         """Returns updated UserPreferences class from POST form data"""
