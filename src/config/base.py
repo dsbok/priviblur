@@ -4,7 +4,7 @@ import tomllib
 
 from typing import NamedTuple, Union
 
-from . import deployment, priviblur_backend, cache_config, user_preferences, logging_config, misc
+from . import deployment, priviblur_backend, user_preferences, misc
 
 
 class PriviblurConfig(NamedTuple):
@@ -23,8 +23,6 @@ class PriviblurConfig(NamedTuple):
     deployment: deployment.DeploymentConfig
     backend: priviblur_backend.PriviblurBackendConfig
     default_user_preferences: user_preferences.DefaultUserPreferences
-    cache: cache_config.CacheConfig
-    logging: logging_config.LoggingConfig
     misc: misc.MiscellaneousConfig
 
 
@@ -78,8 +76,6 @@ def load_config(path: str) -> PriviblurConfig:
             "default_user_preferences",
             "default_user_preferences",
         ),
-        (cache_config.CacheConfig, "cache", "cache"),
-        (logging_config.LoggingConfig, "logging", "logging"),
         (misc.MiscellaneousConfig, "misc", "misc"),
     )
 

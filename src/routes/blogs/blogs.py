@@ -3,7 +3,6 @@ import urllib.parse
 import sanic
 
 from ... import priviblur_extractor
-from ...cache import get_blog_posts, get_blog_search_results
 
 blogs = sanic.Blueprint("blogs", url_prefix="/")
 
@@ -19,9 +18,10 @@ async def _blog_posts(request: sanic.Request, blog: str):
     if before_id := request.args.get("before_id"):
         before_id = urllib.parse.unquote(before_id)
 
-    blog = await get_blog_posts(
-        request.app.ctx, blog, continuation=continuation, before_id=before_id
+    raw = await request.app.ctx.TumblrAPI.blog_posts(
+        blog, continuation=continuation, before_id=before_id
     )
+    blog = priviblur_extractor.parse_blog_timeline(raw)
 
     return await request.app.ctx.render(
         "blog/blog",
@@ -44,7 +44,10 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     if continuation := request.args.get("continuation"):
         continuation = urllib.parse.unquote(continuation)
 
-    blog = await get_blog_posts(request.app.ctx, blog, continuation=continuation, tag=tag)
+    raw = await request.app.ctx.TumblrAPI.blog_posts(
+        blog, continuation=continuation, tag=tag
+    )
+    blog = priviblur_extractor.parse_blog_timeline(raw)
 
     return await request.app.ctx.render(
         "blog/blog",
@@ -69,12 +72,15 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
         continuation = urllib.parse.unquote(continuation)
 
     try:
-        blog_timeline = await get_blog_search_results(
-            request.app.ctx, blog, query, continuation=continuation
+        raw = await request.app.ctx.TumblrAPI.blog_search(
+            blog, query, continuation=continuation
         )
+        blog_timeline = priviblur_extractor.parse_blog_timeline(raw, is_search=True)
     except IndexError:
+        raw_blog = await request.app.ctx.TumblrAPI.blog_posts(blog)
+        blog_info = priviblur_extractor.parse_blog_timeline(raw_blog).blog_info
         blog_timeline = priviblur_extractor.models.timelines.BlogTimeline(
-            blog_info=(await get_blog_posts(request.app.ctx, blog)).blog_info,
+            blog_info=blog_info,
             posts=[],
             total_posts=0,
         )

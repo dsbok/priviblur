@@ -5,7 +5,6 @@ from typing import Sequence
 
 import dominate.tags
 
-from ..cache import get_poll_results
 
 
 def is_tumblr_url(url: str | urllib.parse.ParseResult):
@@ -160,6 +159,7 @@ async def create_poll_callback(ctx, blog, post_id):
         current_timestamp = round(datetime.datetime.utcnow().timestamp())
         expired = current_timestamp > expiration_timestamp
 
-        return await get_poll_results(ctx, blog, post_id, poll_id, expired=expired)
+        initial_results = await ctx.TumblrAPI.poll_results(blog, post_id, poll_id)
+        return initial_results["response"]
 
     return poll_callable

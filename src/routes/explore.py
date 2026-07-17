@@ -2,7 +2,7 @@ import urllib.parse
 
 import sanic
 
-from ..cache import get_explore_results
+from .. import priviblur_extractor
 
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 
@@ -17,32 +17,26 @@ async def _handle_explore(request, endpoint, post_type=None):
 
     match raw_endpoint:
         case "explore._trending":
-            timeline = await get_explore_results(
-                request.app.ctx,
-                request.app.ctx.TumblrAPI.explore_trending,
-                "trending",
-                continuation,
+            raw = await request.app.ctx.TumblrAPI.explore_trending(
+                continuation=continuation
             )
+            timeline = priviblur_extractor.parse_timeline(raw)
 
             title = request.app.ctx.translate(request.ctx.language, "explore_trending_page_title")
         case "explore._today":
-            timeline = await get_explore_results(
-                request.app.ctx,
-                request.app.ctx.TumblrAPI.explore_today,
-                "today",
-                continuation,
+            raw = await request.app.ctx.TumblrAPI.explore_today(
+                continuation=continuation
             )
+            timeline = priviblur_extractor.parse_timeline(raw)
             title = request.app.ctx.translate(
                 request.ctx.language, "explore_today_on_tumblr_page_title"
             )
         case _:
-            timeline = await get_explore_results(
-                request.app.ctx,
-                request.app.ctx.TumblrAPI.explore_post,
-                post_type.name.lower(),
-                continuation,
+            raw = await request.app.ctx.TumblrAPI.explore_post(
+                continuation=continuation,
                 post_type=post_type,
             )
+            timeline = priviblur_extractor.parse_timeline(raw)
             title = request.app.ctx.translate(request.ctx.language, "explore_trending_page_title")
 
     return await request.app.ctx.render(

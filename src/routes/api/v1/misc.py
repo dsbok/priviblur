@@ -2,8 +2,6 @@ import urllib.parse
 
 import sanic
 
-from ....cache import get_poll_results
-
 misc = sanic.Blueprint("api_misc", url_prefix="/")
 
 
@@ -14,10 +12,7 @@ async def poll_results(request, blog: str, post_id: int, poll_id: int):
     blog = urllib.parse.unquote(blog)
     poll_id = urllib.parse.unquote(poll_id)
 
-    expired = request.args.get("expired")
-
-    initial_results = await get_poll_results(
-        ctx=request.app.ctx, blog=blog, post_id=post_id, poll_id=poll_id, expired=bool(expired)
-    )
+    raw = await request.app.ctx.TumblrAPI.poll_results(blog, post_id, poll_id)
+    initial_results = raw["response"]
 
     return sanic.response.json(initial_results, headers={"Cache-Control": "max-age=600, immutable"})

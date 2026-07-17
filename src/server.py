@@ -12,22 +12,20 @@ import babel.lists
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes, priviblur_extractor, preferences, i18n
-from .exceptions import error_handlers
 from .config import load_config
-from .helpers import setup_logging, helpers, render, ext_npf_renderer
+from .exceptions import error_handlers
+from .helpers import helpers, render, ext_npf_renderer
 
 
 # Load configuration file
 
 config = load_config(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"))
 
-LOG_CONFIG = setup_logging.setup_logging(config.logging)
 app = sanic.Sanic(
     "Priviblur",
     loads=orjson.loads,
     dumps=orjson.dumps,
     env_prefix="PRIVIBLUR_",
-    log_config=LOG_CONFIG,
 )
 app.config.OAS = False
 
@@ -37,8 +35,6 @@ app.ctx.SUPPORTED_LANGUAGES = i18n.SUPPORTED_LANGUAGES
 # Constants
 
 app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
-
-app.ctx.LOGGER = logging.getLogger("priviblur")
 
 app.ctx.NPF_RENDERER_VERSION = NPF_RENDERER_VERSION
 

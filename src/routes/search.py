@@ -2,7 +2,7 @@ import urllib.parse
 
 import sanic
 
-from ..cache import get_search_results
+from .. import priviblur_extractor
 
 search = sanic.Blueprint("search", url_prefix="/search")
 
@@ -131,7 +131,13 @@ async def _query_search(request, query, **kwargs):
     if continuation := request.args.get("continuation"):
         continuation = urllib.parse.unquote(continuation)
 
-    return await get_search_results(request.app.ctx, query, continuation, **kwargs)
+    raw = await request.app.ctx.TumblrAPI.timeline_search(
+        query,
+        request.app.ctx.TumblrAPI.config.TimelineType.POST,
+        continuation=continuation,
+        **kwargs,
+    )
+    return priviblur_extractor.parse_timeline(raw)
 
 
 async def _render(request, timeline, query, **kwargs):

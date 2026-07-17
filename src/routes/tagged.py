@@ -2,7 +2,7 @@ import urllib.parse
 
 import sanic
 
-from ..cache import get_tag_browse_results
+from .. import priviblur_extractor
 
 tagged = sanic.Blueprint("tagged", url_prefix="/tagged")
 
@@ -22,9 +22,10 @@ async def _main(request: sanic.Request, tag: str):
     else:
         sort_by = "top"
 
-    timeline = await get_tag_browse_results(
-        request.app.ctx, tag, latest=latest, continuation=continuation
+    raw = await request.app.ctx.TumblrAPI.hubs_timeline(
+        tag, latest=latest, continuation=continuation
     )
+    timeline = priviblur_extractor.parse_timeline(raw)
 
     # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't
     # added when applying a search filter
