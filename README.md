@@ -37,7 +37,7 @@ If you prefer building and running the container manually with Docker commands:
 
 ```bash
 # Build the production Docker image
-docker build -t hyperblur:latest -f docker/Dockerfile .
+docker build -t hyperblur:latest -f Dockerfile .
 
 # Run container on port 8010
 docker run -d \

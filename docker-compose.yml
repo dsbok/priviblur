@@ -2,7 +2,7 @@ services:
   hyperblur:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile
     container_name: hyperblur
     restart: unless-stopped
     ports:
