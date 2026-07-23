@@ -313,7 +313,7 @@ async def _main_tagged(request: sanic.Request, tag: str):
 
 
 # 7. Blogs & Blog Post Blueprints
-blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\\d]{1}[a-z\\d-]{0,30}[a-z\\d]{0,1})>")
+blogs = sanic.Blueprint("blogs", url_prefix="")
 
 @blogs.get("/")
 @blogs.get("rss", name="_blog_posts_rss", ctx_rss=True)
@@ -381,8 +381,27 @@ def get_blog_post_path(request):
 async def handle_post_slug(request):
     blog = urllib.parse.unquote(request.match_info["blog"])
     post_id = request.match_info["post_id"]
-    raw = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
-    post = hyperblur_extractor.parse_timeline(raw).elements[0]
+    try:
+        raw = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
+        post = hyperblur_extractor.parse_timeline(raw).elements[0]
+    except Exception:
+        avatar_list = [{"url": "/assets/images/anon_96px.png"}] * 10
+        blog_obj = hyperblur_extractor.Blog(name=blog, title=blog, avatar=avatar_list)
+        post = hyperblur_extractor.Post(
+            id=int(post_id),
+            blog=blog_obj,
+            slug="",
+            date="",
+            timestamp=0,
+            post_url=f"{blog}/{post_id}",
+            short_url=f"https://tmblr.co/{post_id}",
+            reblog_key="",
+            tags=(),
+            content=(),
+            layout=(),
+            community_label_categories=(),
+            note_count=0,
+        )
 
     if slug := request.match_info.get("slug"):
         slug = urllib.parse.unquote(slug)
@@ -496,7 +515,9 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
         context={"app": request.app, "blog_info": request.ctx.parsed_post.blog, "post_id": str(post_id), "note_type": "likes", "notes": parsed_notes},
     )
 
-blogs.group(blog_post_bp)
+blogs_group = sanic.Blueprint.group(
+    blogs, blog_post_bp, url_prefix=r"/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-z\d]{0,1})>"
+)
 
 
 # 8. API Misc Blueprint
@@ -510,4 +531,4 @@ async def poll_results(request, blog: str, post_id: int, poll_id: int):
     return sanic.response.json(raw["response"], headers={"Cache-Control": "max-age=600, immutable"})
 
 
-BLUEPRINTS = [assets, explore, search, tagged, media, miscellaneous, blogs, api_misc]
+BLUEPRINTS = [assets, explore, search, tagged, media, miscellaneous, blogs_group, api_misc]
