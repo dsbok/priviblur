@@ -14,10 +14,31 @@ Hyperblur is a ultra-fast, privacy-focused, lightweight alternative frontend for
 ## Quick Start (Docker)
 
 ### 1. Launch with Docker Compose
+Create a `docker-compose.yml` file with the following configuration:
+
+```yaml
+services:
+  hyperblur:
+    image: ghcr.io/dsbok/hyperblur:main
+    container_name: hyperblur
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:8010:8000"
+    environment:
+      - HYPERBLUR_DEPLOYMENT_HOST=0.0.0.0
+      - HYPERBLUR_DEPLOYMENT_PORT=8000
+      - HYPERBLUR_DEPLOYMENT_HTTPS=true
+      - HYPERBLUR_DEPLOYMENT_WORKERS=4
+      # Uncomment to allow viewing blogs that require being logged in
+      # - HYPERBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
+
+```
+
 Run Hyperblur locally on port **8010**:
 
 ```bash
-docker compose up -d --build
+docker compose up -d
+
 ```
 
 Access the interface in your browser at:
@@ -27,6 +48,7 @@ Access the interface in your browser at:
 
 ```bash
 docker compose down -v
+
 ```
 
 ---
@@ -47,6 +69,7 @@ docker run -d \
   -e HYPERBLUR_DEPLOYMENT_PORT=8000 \
   -e HYPERBLUR_DEPLOYMENT_WORKERS=4 \
   hyperblur:latest
+
 ```
 
 ---
@@ -56,7 +79,7 @@ docker run -d \
 All application configuration parameters can be passed via environment variables in `docker-compose.yml` or container launch commands:
 
 | Variable | Default | Description |
-| :--- | :--- | :--- |
+| --- | --- | --- |
 | `HYPERBLUR_DEPLOYMENT_HOST` | `0.0.0.0` | IP address the Sanic web server binds to inside container |
 | `HYPERBLUR_DEPLOYMENT_PORT` | `8000` | Internal container TCP port |
 | `HYPERBLUR_DEPLOYMENT_HTTPS` | `true` | Enables secure cookie flags and HTTPS header policies |
@@ -67,4 +90,4 @@ All application configuration parameters can be passed via environment variables
 
 ## License
 
-Distributed under the [GNU AGPLv3 License](LICENSE).
+Distributed under the [GNU AGPLv3 License](https://www.google.com/search?q=LICENSE).
