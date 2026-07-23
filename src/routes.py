@@ -213,7 +213,7 @@ async def query_param_redirect(request: sanic.Request):
         return sanic.redirect(request.app.url_for("search._main", query=urllib.parse.quote(query, safe="")))
     return sanic.redirect(request.app.url_for("explore._trending"))
 
-@search.get("/<query:str>")
+@search.get("/<query:str>", name="_main")
 @search.get("/<query:str>/rss", name="_main_rss", ctx_rss=True, ctx_template="timeline")
 async def _main_search(request: sanic.Request, query: str):
     query = urllib.parse.unquote(query)
@@ -259,7 +259,7 @@ async def _request_search_filter_post(request, query, post_filter, latest):
         if latest:
             url = request.app.url_for("search._sort_by_search", query=urllib.parse.quote(query))
         else:
-            url = request.app.url_for("search._main_search", query=urllib.parse.quote(query))
+            url = request.app.url_for("search._main", query=urllib.parse.quote(query))
         url += f"?{request.query_string}" if request.query_string else ""
         return sanic.redirect(url)
 
