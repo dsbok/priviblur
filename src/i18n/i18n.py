@@ -1,24 +1,17 @@
-import sys
-import gettext
 import typing
-
-import sanic
 
 from .i18n_data import LOCALE_DATA
 from .npf_renderer_localizer import NPFRendererLocalizer
+from .translations import TRANSLATIONS
 
 
 class Language:
     """Stores metadata about supported translations"""
 
-    def __init__(self, locale, priviblur_gettext) -> None:
+    def __init__(self, locale) -> None:
         self.locale = locale
-
-        self.priviblur_translations = priviblur_gettext
-
         self.npf_renderer_localizer = NPFRendererLocalizer(locale, translate)
-
-        self.name, self.translation_percentage = LOCALE_DATA[locale]
+        self.name, self.translation_percentage = LOCALE_DATA.get(locale, ("English", 100))
 
 
 SUPPORTED_LANGUAGES = [
@@ -29,32 +22,8 @@ SUPPORTED_LANGUAGES.sort()
 
 
 def initialize_locales() -> typing.Mapping[str, Language]:
-    """Initializes locales into GNUTranslations instances"""
-    try:
-        # Initialize english locale first so that we may use it as a fallback
-
-        priviblur_english_instance = gettext.translation(
-            "priviblur", localedir="locales", languages=("en_US",)
-        )
-
-        languages = {"en_US": Language("en_US", priviblur_english_instance)}
-
-        for locale in SUPPORTED_LANGUAGES:
-            if locale == "en_US":
-                continue
-
-            instance = gettext.translation("priviblur", localedir="locales", languages=(locale,))
-            instance.add_fallback(priviblur_english_instance)
-
-            languages[locale] = Language(locale, instance)
-    except FileNotFoundError:
-        print("Error: Unable to find locale files. Did you forget to compile them?")
-
-        sys.exit()
-    except Exception as e:
-        raise e
-
-    return languages
+    """Initializes locales using embedded translation dictionaries"""
+    return {locale: Language(locale) for locale in SUPPORTED_LANGUAGES}
 
 
 def translate(
@@ -63,18 +32,21 @@ def translate(
     number: int | float | None = None,
     substitution: str | dict | None = None,
 ) -> str:
-    app = sanic.Sanic.get_app("Priviblur")
+    lang_dict = TRANSLATIONS.get(language, TRANSLATIONS.get("en_US", {}))
+    raw_val = lang_dict.get(id, TRANSLATIONS.get("en_US", {}).get(id, id))
 
-    gettext_instance = app.ctx.LANGUAGES[language].priviblur_translations
-
-    if number is not None:
-        translated = gettext_instance.ngettext(id, f"{id}_plural", number)
+    if isinstance(raw_val, (tuple, list)):
+        index = 0 if (number == 1 or number == 1.0) else 1
+        translated = raw_val[index] if len(raw_val) > index else raw_val[0]
     else:
-        translated = gettext_instance.gettext(id)
+        translated = str(raw_val)
 
     if isinstance(substitution, str):
         translated = translated.format(substitution)
     elif isinstance(substitution, dict):
         translated = translated.format(**substitution)
+    elif number is not None and "{0}" in translated:
+        translated = translated.format(number)
 
     return translated
+

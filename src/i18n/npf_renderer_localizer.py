@@ -1,17 +1,9 @@
 import functools
-import gettext
 
 import babel.dates
 import babel.numbers
 import npf_renderer
 
-
-class NPFRendererGettextFallback(gettext.NullTranslations):
-    def gettext(self, message):
-        return npf_renderer.DEFAULT_LOCALIZATION["strings"][message]
-
-    def ngettext(self, msgid1: str, msgid2: str, n: int) -> str:
-        return npf_renderer.DEFAULT_LOCALIZATION["strings"][msgid1]
 
 
 class NPFRendererLocalizer:

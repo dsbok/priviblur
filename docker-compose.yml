@@ -1,10 +1,12 @@
 services:
   priviblur:
-    image: ghcr.io/dsbok/priviblur:master
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     container_name: priviblur
     restart: unless-stopped
     ports:
-      - "0.0.0.0:8009:8000"
+      - "0.0.0.0:8010:8000"
     environment:
       - PRIVIBLUR_DEPLOYMENT_HOST=0.0.0.0
       - PRIVIBLUR_DEPLOYMENT_PORT=8000
@@ -12,3 +14,4 @@ services:
       - PRIVIBLUR_DEPLOYMENT_WORKERS=4
       # Uncomment to allow viewing blogs that require being logged in
       # - PRIVIBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
+

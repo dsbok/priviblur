@@ -1,13 +1,15 @@
 .post {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 25px 25px;
-  background: var(--color-top-level-card-bg);
-  border-radius: 0px;
-  border: 2px solid #ffffff;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #282828;
+  border-radius: 0;
+  border: 1px solid #444444;
   width: 100%;
   box-sizing: border-box;
+  content-visibility: auto;
+  contain-intrinsic-size: 100px 300px;
 }
 
 @media (max-width: 590px) {
@@ -30,10 +32,10 @@
 }
 
 .ask-body {
-  padding: 15px 15px 0;
-  background: var(--color-ask-bg);
-  border-radius: 0px;
-  border: 2px dashed #ffffff;
+  padding: 12px 14px 0;
+  background: #141414;
+  border-radius: 0;
+  border: 1px dashed #444444;
   width: 100%;
 }
 
@@ -45,7 +47,7 @@
 }
 
 .reblog-attribution .blog-name {
-  color: var(--color-reblog-attribution);
+  color: #3399ff;
 }
 
 .reblog-attribution .icon path {
@@ -55,19 +57,19 @@
 .post-author {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 0px;
-  border: 2px solid #ffffff;
-  transition: transform 0.1s ease;
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  border: 1px solid #444444;
+  transition: opacity 0.15s ease;
 }
 
 .avatar:hover {
-  transform: scale(1.05);
+  opacity: 0.85;
 }
 
 .author-information {
@@ -85,7 +87,7 @@
 }
 
 a.blog-name {
-  color: var(--color-post-blog-name);
+  color: #3399ff;
   font-weight: bold;
   align-self: center;
   word-break: break-word;
@@ -93,6 +95,8 @@ a.blog-name {
 
 a.blog-name:hover {
   align-self: center;
+  color: #66b2ff;
+  text-decoration: underline;
 }
 
 .broken-blog, .deactivated-blog {
@@ -175,18 +179,20 @@ a.hidden-reblog {
 
 .post-tag {
   display: inline-block;
-  background: var(--color-post-tag-bg);
-  border-radius: 0px;
-  border: 1px solid #ffffff;
-  padding: 2px 6px;
-  font-weight: 700;
-  transition: all 0.1s ease;
+  background: #333333;
+  border-radius: 0;
+  border: 1px solid #444444;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #3399ff;
+  transition: all 0.15s ease;
 }
 
 .post-tag:hover {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
+  background: #444444;
+  color: #66b2ff;
+  border-color: #3399ff;
 }
 
 .post-interaction {
@@ -264,27 +270,27 @@ a.hidden-reblog {
 }
 
 .unblur-post-button.button, .no-js-view-community-post-instruction {
-  background: none;
+  background: #0066cc;
   padding: 5px 15px;
-  border-radius: 25px;
+  border-radius: 0;
   font-weight: bold;
-  font-size: 16px;
-  color: var(--color-community-label-button-text);
-  border: solid 2px var(--color-community-label-button-highlight);
+  font-size: 14px;
+  color: #ffffff;
+  border: 1px solid #0066cc;
   margin-top: 25px;
 }
 
 .unblur-post-button.button:hover {
-  background: var(--color-community-label-button-hover);
+  background: #0055aa;
 }
 
 .post-notes {
-  background: var(--color-top-level-card-bg);
+  background: #282828;
   display: flex;
   flex-direction: column;
   gap: 25px;
-  border-radius: 0px;
-  border: 2px solid #ffffff;
+  border-radius: 0;
+  border: 1px solid #444444;
   padding: 15px 15px 25px;
 }
 
@@ -295,9 +301,9 @@ a.hidden-reblog {
   gap: 50px;
   list-style: none;
   padding: 0 20px;
-  background: var(--color-post-notes-viewer-nav-bar-bg);
-  border-radius: 0px;
-  border: 2px solid #ffffff;
+  background: #141414;
+  border-radius: 0;
+  border: 1px solid #444444;
   margin: 0 15px;
 }
 
@@ -309,7 +315,7 @@ a.hidden-reblog {
 .post-notes-nav li.selected {
   border-width: 0 0 3px;
   border-style: solid;
-  border-color: var(--color-nav-bar-selected-tab-highlight);
+  border-color: #3399ff;
 }
 
 .post-notes-nav a {
@@ -383,6 +389,7 @@ a.hidden-reblog {
 
 .post-notes > footer > a {
   font-weight: 550;
+  color: #3399ff;
 }
 
 .post-notes > header > #timeline-control-bar {
@@ -404,26 +411,25 @@ a.hidden-reblog {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   color: #ffffff;
-  border-radius: 5px;
+  border-radius: 0;
   padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid #444444;
 }
 
 .video-download-btn:hover {
-  background: rgba(0, 0, 0, 0.85);
-  transform: scale(1.05);
+  background: #0066cc;
 }
 
 .video-download-btn:active {
-  transform: scale(0.95);
+  background: #0055aa;
 }
 
 .video-download-btn svg {

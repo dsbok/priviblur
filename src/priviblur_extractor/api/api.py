@@ -44,7 +44,7 @@ class TumblrAPI:
                     auth_override = f"Bearer {auth_override}"
                 headers["authorization"] = auth_override
 
-            connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=300, limit=100)
+            connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
             client = aiohttp.ClientSession(
                 "https://www.tumblr.com",
                 headers=headers,
@@ -67,21 +67,7 @@ class TumblrAPI:
         else:
             url = f"{endpoint}"
 
-        # When logging, are we able to prettyprint the output? If so we shall
-        try:
-            import prettyprinter
-
-            _format = prettyprinter.pformat
-        except ImportError:
-
-            def _format(obj):
-                return obj
-
-        logger.info(f"Requesting endpoint: /api/v2/{url}")
-
         response = await self.client.get(f"/api/v2/{url}")
-
-        logger.debug(f"Requested endpoint: /api/v2/{url}")
 
         try:
             result = await response.json(loads=self.json_loader)
@@ -89,26 +75,19 @@ class TumblrAPI:
             if response.status != 200:
                 raise exceptions.TumblrNon200NorJSONResponse(response.status)
 
-            logger.error("Failed to parse JSON response from Tumblr!")
-            logger.error(f"Got error: '{type(e).__name__}'. Reason: '{getattr(e, 'message', '')}'")
-
-            raise exceptions.InitialTumblrAPIParseException(getattr(e, "message", ""))
+            logger.error(f"Failed to parse JSON response: {e}")
+            raise exceptions.InitialTumblrAPIParseException(getattr(e, "message", str(e)))
 
         # Invalid response handling
         if response.status == 429:
             raise exceptions.TumblrRatelimitReachedError(response.status)
         elif response.status != 200:
-            message = result["meta"]["msg"]
-            code = result["meta"]["status"]
-
-            logger.info(f"Error response received with HTTP status code: {code}")
-            logger.debug(f"Response headers: {_format(response.headers)}")
+            message = result.get("meta", {}).get("msg", "Error")
+            code = result.get("meta", {}).get("status", response.status)
 
             if error := result.get("errors"):
-                details = error[0].get("detail")
+                details = error[0].get("detail", "")
                 internal_code = error[0].get("code")
-                logger.info(f"Reason: {details}")
-                logger.info(f"Tumblr internal error code: {internal_code}")
             else:
                 internal_code = None
                 details = ""

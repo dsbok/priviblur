@@ -171,6 +171,8 @@ class NPFFormatter(npf_renderer.format.Formatter):
 
             image_container = image_container[0]
             image_element = image_element[0]
+            image_element["loading"] = "lazy"
+            image_element["decoding"] = "async"
 
             self._add_alt_text_element(block, image_container)
             self._linkify_images(image_container, image_element)

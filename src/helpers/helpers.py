@@ -14,7 +14,7 @@ def is_tumblr_url(url: str | urllib.parse.ParseResult):
     elif isinstance(url, urllib.parse.ParseResult):
         url = url
     else:
-        raise False
+        return False
 
     hostname = url.hostname
 

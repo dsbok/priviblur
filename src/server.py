@@ -67,14 +67,14 @@ async def initialize(app):
         "referer": "https://www.tumblr.com/",
     }
 
-    media_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=300, limit=100)
+    media_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
     app.ctx.MediaClient = aiohttp.ClientSession(
         headers=media_request_headers,
         timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout),
         connector=media_connector,
     )
 
-    at_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=300, limit=100)
+    at_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
     app.ctx.TumblrAtClient = aiohttp.ClientSession(
         "https://at.tumblr.com",
         headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},

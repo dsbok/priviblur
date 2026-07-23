@@ -1,34 +1,81 @@
 # Priviblur
 
-Priviblur is a lightweight, privacy-focused alternative frontend to Tumblr. It allows browsing Tumblr without tracking, without an account, and works without JavaScript.
+Priviblur is a ultra-fast, privacy-focused, lightweight alternative frontend for Tumblr. Built for maximum speed, security, and anonymity, it lets you browse Tumblr content without tracking, without an account, and with zero external CDNs or heavy frameworks.
 
-## Core Features
-- **Privacy Proxying**: All requests (media/data) are proxied through the server.
-- **Account-Free**: View public blogs, trending feeds, and search anonymously.
-- **JS-Free Fallback**: Browse, read post notes, and search with client-side JavaScript disabled.
-- **Downloading**: Download videos with a click on all videos.
+## Core Highlights & Features
 
-## Getting Started
+- **Ultra-Fast Performance**: Zero external CDNs or frameworks. Pure HTML, CSS, and vanilla AJAX (`fetch()`). Native browser rendering acceleration (`content-visibility: auto`, system fonts).
+- **Sharp Minimalist Dark Theme**: Dark grey canvas (`#1e1e1e`), sharp contrast `#ffffff` text, clean sharp borders (`0px` rounded corners), and crisp blue hyperlinks (`#3399ff`).
+- **Privacy & Anonymity**: All media proxies, API calls, and asset requests go through your backend container. Tumblr never receives direct user traffic or client IP addresses.
+- **Embedded Source Locales**: Language strings are directly embedded inside `src/i18n/translations.py` for zero runtime disk/compilation overhead.
+- **One-Click Video Downloads**: Download videos directly from any post with a built-in download action button.
+- **Full Fallback Support**: Fully functional without JavaScript enabled. View blogs, read post notes, perform searches, and browse trending feeds seamless with pure HTML.
 
-### 1. Start the Application
+---
+
+## Quick Start (Docker)
+
+### 1. Launch with Docker Compose
+Run Priviblur locally on port **8010**:
+
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
-The application will be available at `http://localhost:8009`.
+
+Access the interface in your browser at:
+**`http://localhost:8010`**
 
 ### 2. Stop the Application
+
 ```bash
 docker compose down -v
 ```
 
-## Configuration
+---
 
-Essential settings in `docker-compose.yml`:
-- `PRIVIBLUR_DEPLOYMENT_HOST`: Deployment host (default: `0.0.0.0`).
-- `PRIVIBLUR_DEPLOYMENT_PORT`: Internal container port (default: `8000`).
-- `PRIVIBLUR_DEPLOYMENT_HTTPS`: Enables HTTPS secure cookies (default: `true`).
-- `PRIVIBLUR_DEPLOYMENT_WORKERS`: Number of web worker processes (default: `4`).
-- `PRIVIBLUR_TUMBLR_AUTHORIZATION`: Optional Tumblr OAuth/Bearer token to view private or log-in restricted blogs.
+## Manual Docker Build & Deployment
+
+If you prefer building and running the container manually with Docker commands:
+
+```bash
+# Build the production Docker image
+docker build -t priviblur:latest -f docker/Dockerfile .
+
+# Run container on port 8010
+docker run -d \
+  --name priviblur \
+  -p 8010:8000 \
+  -e PRIVIBLUR_DEPLOYMENT_HOST=0.0.0.0 \
+  -e PRIVIBLUR_DEPLOYMENT_PORT=8000 \
+  -e PRIVIBLUR_DEPLOYMENT_WORKERS=4 \
+  priviblur:latest
+```
+
+---
+
+## Environment Configuration
+
+All application configuration parameters can be passed via environment variables in `docker-compose.yml` or container launch commands:
+
+| Variable | Default | Description |
+| :--- | :--- | :--- |
+| `PRIVIBLUR_DEPLOYMENT_HOST` | `0.0.0.0` | IP address the Sanic web server binds to inside container |
+| `PRIVIBLUR_DEPLOYMENT_PORT` | `8000` | Internal container TCP port |
+| `PRIVIBLUR_DEPLOYMENT_HTTPS` | `true` | Enables secure cookie flags and HTTPS header policies |
+| `PRIVIBLUR_DEPLOYMENT_WORKERS` | `4` | Number of concurrent web server worker processes |
+| `PRIVIBLUR_TUMBLR_AUTHORIZATION` | *(Optional)* | Tumblr OAuth / Bearer token to access private or log-in restricted blogs |
+
+---
+
+## Security & Container Hardening
+
+- **Base Image**: Python 3.13 Alpine (`python:3.13-alpine`), updated with zero CVE vulnerability findings.
+- **Non-Root Execution**: Runs as non-privileged user `priviblur` (UID 1000).
+- **Process Supervisor**: Managed by `/sbin/tini` for signal handling and zombie process reaping.
+- **Strict Headers**: Enforces Security Headers (`Content-Security-Policy`, `X-Content-Type-Options: nosniff`, `X-XSS-Protection`).
+
+---
 
 ## License
-AGPLv3
+
+Distributed under the [GNU AGPLv3 License](LICENSE).
