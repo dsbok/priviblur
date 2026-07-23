@@ -45,7 +45,7 @@ def create_user_friendly_error_message(request, exception):
     context = []
 
     if tb := getattr(exception, "__traceback__", None):
-        parent_dir = getattr(request.app.ctx, "PRIVIBLUR_PARENT_DIR_PATH", "")
+        parent_dir = getattr(request.app.ctx, "HYPERBLUR_PARENT_DIR_PATH", "")
         for frame in traceback.extract_tb(tb):
             filename = frame.filename
             if parent_dir and filename.startswith(parent_dir):

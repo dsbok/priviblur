@@ -2,7 +2,7 @@ import urllib.parse
 
 import sanic
 
-from .. import priviblur_extractor
+from .. import hyperblur_extractor
 
 search = sanic.Blueprint("search", url_prefix="/search")
 
@@ -137,7 +137,7 @@ async def _query_search(request, query, **kwargs):
         continuation=continuation,
         **kwargs,
     )
-    return priviblur_extractor.parse_timeline(raw)
+    return hyperblur_extractor.parse_timeline(raw)
 
 
 async def _render(request, timeline, query, **kwargs):

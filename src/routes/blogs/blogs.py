@@ -2,7 +2,7 @@ import urllib.parse
 
 import sanic
 
-from ... import priviblur_extractor
+from ... import hyperblur_extractor
 
 blogs = sanic.Blueprint("blogs", url_prefix="/")
 
@@ -21,7 +21,7 @@ async def _blog_posts(request: sanic.Request, blog: str):
     raw = await request.app.ctx.TumblrAPI.blog_posts(
         blog, continuation=continuation, before_id=before_id
     )
-    blog = priviblur_extractor.parse_blog_timeline(raw)
+    blog = hyperblur_extractor.parse_blog_timeline(raw)
 
     return await request.app.ctx.render(
         "blog/blog",
@@ -47,7 +47,7 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     raw = await request.app.ctx.TumblrAPI.blog_posts(
         blog, continuation=continuation, tag=tag
     )
-    blog = priviblur_extractor.parse_blog_timeline(raw)
+    blog = hyperblur_extractor.parse_blog_timeline(raw)
 
     return await request.app.ctx.render(
         "blog/blog",
@@ -75,11 +75,11 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
         raw = await request.app.ctx.TumblrAPI.blog_search(
             blog, query, continuation=continuation
         )
-        blog_timeline = priviblur_extractor.parse_blog_timeline(raw, is_search=True)
+        blog_timeline = hyperblur_extractor.parse_blog_timeline(raw, is_search=True)
     except IndexError:
         raw_blog = await request.app.ctx.TumblrAPI.blog_posts(blog)
-        blog_info = priviblur_extractor.parse_blog_timeline(raw_blog).blog_info
-        blog_timeline = priviblur_extractor.models.timelines.BlogTimeline(
+        blog_info = hyperblur_extractor.parse_blog_timeline(raw_blog).blog_info
+        blog_timeline = hyperblur_extractor.models.timelines.BlogTimeline(
             blog_info=blog_info,
             posts=[],
             total_posts=0,

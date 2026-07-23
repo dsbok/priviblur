@@ -39,7 +39,7 @@ class TumblrAPI:
 
             import os
             headers = cls.DEFAULT_HEADERS.copy()
-            if auth_override := os.environ.get("PRIVIBLUR_TUMBLR_AUTHORIZATION"):
+            if auth_override := os.environ.get("HYPERBLUR_TUMBLR_AUTHORIZATION"):
                 if not auth_override.startswith("Bearer "):
                     auth_override = f"Bearer {auth_override}"
                 headers["authorization"] = auth_override

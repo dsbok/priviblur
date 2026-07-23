@@ -3,7 +3,7 @@ import urllib.parse
 
 import sanic
 
-from ... import priviblur_extractor
+from ... import hyperblur_extractor
 
 blog_post_bp = sanic.Blueprint("blog_post", url_prefix="/<post_id:int>")
 
@@ -36,7 +36,7 @@ async def handle_post_slug(request):
     post_id = request.match_info["post_id"]
 
     raw = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
-    post = priviblur_extractor.parse_timeline(raw).elements[0]
+    post = hyperblur_extractor.parse_timeline(raw).elements[0]
 
     # Check if slug is passed
     if slug := request.match_info.get("slug"):
@@ -75,7 +75,7 @@ async def handle_post_args(request):
     if (rss_feed := args.get("rss_feed")) and sanic.utils.str_to_bool(rss_feed):
         request.ctx.rss = True
         request.ctx.page_url = (
-            f"{request.app.ctx.PRIVIBLUR_CONFIG.deployment.domain or ''}{request.ctx.post_path}"
+            f"{request.app.ctx.HYPERBLUR_CONFIG.deployment.domain or ''}{request.ctx.post_path}"
         )
 
     # Requesting post notes?
@@ -93,7 +93,7 @@ async def handle_post_args(request):
 @blog_post_bp.get("/")
 @blog_post_bp.get("/<slug:str>", name="_blog_post_with_slug")
 async def _blog_post(request: sanic.Request, **kwargs):
-    blog_info = priviblur_extractor.models.timelines.BlogTimeline(
+    blog_info = hyperblur_extractor.models.timelines.BlogTimeline(
         request.ctx.parsed_post.blog, (), None, None
     )
 
@@ -134,7 +134,7 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
         raw = await request.app.ctx.TumblrAPI.blog_post_replies(
             blog, post_id, latest=latest
         )
-    parsed_notes = priviblur_extractor.parse_note_timeline(raw)
+    parsed_notes = hyperblur_extractor.parse_note_timeline(raw)
 
     return await request.app.ctx.render(
         "post/notes/viewer/viewer_page",
@@ -188,7 +188,7 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
         raw = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(
             blog, post_id, **args_to_tumblr_api_wrapper
         )
-    parsed_notes = priviblur_extractor.parse_note_timeline(raw)
+    parsed_notes = hyperblur_extractor.parse_note_timeline(raw)
 
     return await request.app.ctx.render(
         "post/notes/viewer/viewer_page",
@@ -211,7 +211,7 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
     raw = await request.app.ctx.TumblrAPI.blog_notes(
         blog, post_id, before_timestamp=request.args.get("before_timestamp")
     )
-    parsed_notes = priviblur_extractor.parse_note_timeline(raw)
+    parsed_notes = hyperblur_extractor.parse_note_timeline(raw)
 
     return await request.app.ctx.render(
         "post/notes/viewer/viewer_page",

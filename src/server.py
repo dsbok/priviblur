@@ -11,7 +11,7 @@ import babel.dates
 import babel.lists
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
-from . import routes, priviblur_extractor, preferences, i18n
+from . import routes, hyperblur_extractor, preferences, i18n
 from .config import load_config
 from .exceptions import error_handlers
 from .helpers import helpers, render, ext_npf_renderer
@@ -19,13 +19,13 @@ from .helpers import helpers, render, ext_npf_renderer
 
 # Load configuration file
 
-config = load_config(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"))
+config = load_config(os.environ.get("HYPERBLUR_CONFIG_LOCATION", "./config.toml"))
 
 app = sanic.Sanic(
-    "Priviblur",
+    "Hyperblur",
     loads=orjson.loads,
     dumps=orjson.dumps,
-    env_prefix="PRIVIBLUR_",
+    env_prefix="HYPERBLUR_",
 )
 app.config.OAS = False
 
@@ -41,24 +41,24 @@ app.ctx.NPF_RENDERER_VERSION = NPF_RENDERER_VERSION
 app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
 
-app.ctx.PRIVIBLUR_CONFIG = config
+app.ctx.HYPERBLUR_CONFIG = config
 app.ctx.translate = i18n.translate
 app.ctx.CURRENT_COMMIT = "1.0.0"
 
-app.ctx.PRIVIBLUR_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+app.ctx.HYPERBLUR_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 app.ctx.create_user_friendly_error_message = error_handlers.create_user_friendly_error_message
 
 
 @app.listener("before_server_start")
 async def initialize(app):
-    priviblur_backend = app.ctx.PRIVIBLUR_CONFIG.backend
+    hyperblur_backend = app.ctx.HYPERBLUR_CONFIG.backend
 
-    app.ctx.TumblrAPI = await priviblur_extractor.TumblrAPI.create(
-        main_request_timeout=priviblur_backend.main_response_timeout, json_loads=orjson.loads
+    app.ctx.TumblrAPI = await hyperblur_extractor.TumblrAPI.create(
+        main_request_timeout=hyperblur_backend.main_response_timeout, json_loads=orjson.loads
     )
 
     media_request_headers = {
-        "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
+        "user-agent": hyperblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
         "accept-encoding": "gzip, deflate",
         "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
         "accept-language": "en-US,en;q=0.5",
@@ -70,15 +70,15 @@ async def initialize(app):
     media_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
     app.ctx.MediaClient = aiohttp.ClientSession(
         headers=media_request_headers,
-        timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout),
+        timeout=aiohttp.ClientTimeout(hyperblur_backend.image_response_timeout),
         connector=media_connector,
     )
 
     at_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
     app.ctx.TumblrAtClient = aiohttp.ClientSession(
         "https://at.tumblr.com",
-        headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
-        timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout),
+        headers={"user-agent": hyperblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
+        timeout=aiohttp.ClientTimeout(hyperblur_backend.main_response_timeout),
         connector=at_connector,
     )
 
@@ -117,14 +117,14 @@ async def initialize(app):
     )
 
     app.ext.environment.tests["a_post"] = lambda element: isinstance(
-        element, priviblur_extractor.models.post.Post
+        element, hyperblur_extractor.models.post.Post
     )
 
 
 @app.listener("main_process_start")
 async def main_startup_listener(app):
-    """Startup listener to notify of priviblur startup"""
-    print("Starting up Priviblur")
+    """Startup listener to notify of hyperblur startup"""
+    print("Starting up Hyperblur")
 
 
 @app.listener("after_server_stop")
@@ -182,7 +182,7 @@ async def after_all_routes(request, response):
 for route in routes.BLUEPRINTS:
     app.blueprint(route)
 
-# Register error handlers into Priviblur
+# Register error handlers into Hyperblur
 error_handlers.register(app)
 
 if __name__ == "__main__":

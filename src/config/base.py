@@ -4,24 +4,24 @@ import tomllib
 
 from typing import NamedTuple, Union
 
-from . import deployment, priviblur_backend, user_preferences, misc
+from . import deployment, hyperblur_backend, user_preferences, misc
 
 
-class PriviblurConfig(NamedTuple):
-    """NamedTuple storing configuration data for Priviblur
+class HyperblurConfig(NamedTuple):
+    """NamedTuple storing configuration data for Hyperblur
 
     Encapsulates various configuration settings under a single field.
 
     Attributes:
-        deployment: Configuration settings for deploying Priviblur
+        deployment: Configuration settings for deploying Hyperblur
         backend: Configuration settings to customize
-            how Priviblur requests Tumblr
+            how Hyperblur requests Tumblr
         logging: Configuration settings to change logging behavior
         misc: Configuration settings that doesn't fit into any other categories
     """
 
     deployment: deployment.DeploymentConfig
-    backend: priviblur_backend.PriviblurBackendConfig
+    backend: hyperblur_backend.HyperblurBackendConfig
     default_user_preferences: user_preferences.DefaultUserPreferences
     misc: misc.MiscellaneousConfig
 
@@ -49,8 +49,8 @@ def cast_val(val: str, field_type):
     return val
 
 
-def load_config(path: str) -> PriviblurConfig:
-    """Loads a TOML configuration file and environment variables into a PriviblurConfig object"""
+def load_config(path: str) -> HyperblurConfig:
+    """Loads a TOML configuration file and environment variables into a HyperblurConfig object"""
 
     config = {}
     try:
@@ -63,14 +63,14 @@ def load_config(path: str) -> PriviblurConfig:
         print("Cannot access the configuration file. Do I have the right permissions?")
         sys.exit()
 
-    # The config file can contain additional arguments that Priviblur does not recognize.
-    # As such some processing is needed to only retrieve what Priviblur can understand
+    # The config file can contain additional arguments that Hyperblur does not recognize.
+    # As such some processing is needed to only retrieve what Hyperblur can understand
 
     # Defines config sections
     config_sections = (
         # Corresponding object, internal name, section name in the config file
         (deployment.DeploymentConfig, "deployment", "deployment"),
-        (priviblur_backend.PriviblurBackendConfig, "backend", "priviblur_backend"),
+        (hyperblur_backend.HyperblurBackendConfig, "backend", "hyperblur_backend"),
         (
             user_preferences.DefaultUserPreferences,
             "default_user_preferences",
@@ -79,7 +79,7 @@ def load_config(path: str) -> PriviblurConfig:
         (misc.MiscellaneousConfig, "misc", "misc"),
     )
 
-    priviblur_config_data = {}
+    hyperblur_config_data = {}
 
     for section_definition in config_sections:
         section_object, internal_name, external_name = section_definition
@@ -93,14 +93,14 @@ def load_config(path: str) -> PriviblurConfig:
 
         # Load from environment variables
         for field_name in section_object._fields:
-            # Format: PRIVIBLUR_[SECTION]_[KEY]
-            env_var_name = f"PRIVIBLUR_{external_name.upper()}_{field_name.upper()}"
+            # Format: HYPERBLUR_[SECTION]_[KEY]
+            env_var_name = f"HYPERBLUR_{external_name.upper()}_{field_name.upper()}"
             env_val = os.environ.get(env_var_name)
 
             if env_val is None and external_name == "deployment" and field_name == "host":
-                env_val = os.environ.get("PRIVIBLUR_HOST")
+                env_val = os.environ.get("HYPERBLUR_HOST")
             if env_val is None and external_name == "deployment" and field_name == "port":
-                env_val = os.environ.get("PRIVIBLUR_PORT")
+                env_val = os.environ.get("HYPERBLUR_PORT")
 
             if env_val is not None:
                 field_type = section_object.__annotations__.get(field_name)
@@ -109,8 +109,8 @@ def load_config(path: str) -> PriviblurConfig:
                 except Exception as e:
                     print(f"Error casting env var {env_var_name}={env_val} to {field_type}: {e}")
 
-        priviblur_config_data[internal_name] = section_object(**arguments_to_load)
+        hyperblur_config_data[internal_name] = section_object(**arguments_to_load)
 
     # TODO Validate invalid config values
 
-    return PriviblurConfig(**priviblur_config_data)
+    return HyperblurConfig(**hyperblur_config_data)

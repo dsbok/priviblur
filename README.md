@@ -1,6 +1,6 @@
-# Priviblur
+# Hyperblur
 
-Priviblur is a ultra-fast, privacy-focused, lightweight alternative frontend for Tumblr. Built for maximum speed, security, and anonymity, it lets you browse Tumblr content without tracking, without an account, and with zero external CDNs or heavy frameworks.
+Hyperblur is a ultra-fast, privacy-focused, lightweight alternative frontend for Tumblr. Built for maximum speed, security, and anonymity, it lets you browse Tumblr content without tracking, without an account, and with zero external CDNs or heavy frameworks.
 
 ## Core Highlights & Features
 
@@ -16,7 +16,7 @@ Priviblur is a ultra-fast, privacy-focused, lightweight alternative frontend for
 ## Quick Start (Docker)
 
 ### 1. Launch with Docker Compose
-Run Priviblur locally on port **8010**:
+Run Hyperblur locally on port **8010**:
 
 ```bash
 docker compose up -d --build
@@ -39,16 +39,16 @@ If you prefer building and running the container manually with Docker commands:
 
 ```bash
 # Build the production Docker image
-docker build -t priviblur:latest -f docker/Dockerfile .
+docker build -t hyperblur:latest -f docker/Dockerfile .
 
 # Run container on port 8010
 docker run -d \
-  --name priviblur \
+  --name hyperblur \
   -p 8010:8000 \
-  -e PRIVIBLUR_DEPLOYMENT_HOST=0.0.0.0 \
-  -e PRIVIBLUR_DEPLOYMENT_PORT=8000 \
-  -e PRIVIBLUR_DEPLOYMENT_WORKERS=4 \
-  priviblur:latest
+  -e HYPERBLUR_DEPLOYMENT_HOST=0.0.0.0 \
+  -e HYPERBLUR_DEPLOYMENT_PORT=8000 \
+  -e HYPERBLUR_DEPLOYMENT_WORKERS=4 \
+  hyperblur:latest
 ```
 
 ---
@@ -59,18 +59,18 @@ All application configuration parameters can be passed via environment variables
 
 | Variable | Default | Description |
 | :--- | :--- | :--- |
-| `PRIVIBLUR_DEPLOYMENT_HOST` | `0.0.0.0` | IP address the Sanic web server binds to inside container |
-| `PRIVIBLUR_DEPLOYMENT_PORT` | `8000` | Internal container TCP port |
-| `PRIVIBLUR_DEPLOYMENT_HTTPS` | `true` | Enables secure cookie flags and HTTPS header policies |
-| `PRIVIBLUR_DEPLOYMENT_WORKERS` | `4` | Number of concurrent web server worker processes |
-| `PRIVIBLUR_TUMBLR_AUTHORIZATION` | *(Optional)* | Tumblr OAuth / Bearer token to access private or log-in restricted blogs |
+| `HYPERBLUR_DEPLOYMENT_HOST` | `0.0.0.0` | IP address the Sanic web server binds to inside container |
+| `HYPERBLUR_DEPLOYMENT_PORT` | `8000` | Internal container TCP port |
+| `HYPERBLUR_DEPLOYMENT_HTTPS` | `true` | Enables secure cookie flags and HTTPS header policies |
+| `HYPERBLUR_DEPLOYMENT_WORKERS` | `4` | Number of concurrent web server worker processes |
+| `HYPERBLUR_TUMBLR_AUTHORIZATION` | *(Optional)* | Tumblr OAuth / Bearer token to access private or log-in restricted blogs |
 
 ---
 
 ## Security & Container Hardening
 
 - **Base Image**: Python 3.13 Alpine (`python:3.13-alpine`), updated with zero CVE vulnerability findings.
-- **Non-Root Execution**: Runs as non-privileged user `priviblur` (UID 1000).
+- **Non-Root Execution**: Runs as non-privileged user `hyperblur` (UID 1000).
 - **Process Supervisor**: Managed by `/sbin/tini` for signal handling and zombie process reaping.
 - **Strict Headers**: Enforces Security Headers (`Content-Security-Policy`, `X-Content-Type-Options: nosniff`, `X-XSS-Protection`).
 

@@ -1,10 +1,10 @@
 from src.exceptions.error_handlers import base
-from src.priviblur_extractor import priviblur_exceptions
+from src.hyperblur_extractor import hyperblur_exceptions
 
 extractor_errors = base.ErrorHandlerGroup()
 
 
-@extractor_errors.register(priviblur_exceptions.TumblrLoginRequiredError)
+@extractor_errors.register(hyperblur_exceptions.TumblrLoginRequiredError)
 async def tumblr_error_login_walled(request, exception):
     return await request.app.ctx.render(
         "misc/msg_error",
@@ -22,7 +22,7 @@ async def tumblr_error_login_walled(request, exception):
     )
 
 
-@extractor_errors.register(priviblur_exceptions.TumblrPasswordRequiredBlogError)
+@extractor_errors.register(hyperblur_exceptions.TumblrPasswordRequiredBlogError)
 async def tumblr_password_required_blog(request, exception):
     return await request.app.ctx.render(
         "misc/msg_error",
@@ -40,7 +40,7 @@ async def tumblr_password_required_blog(request, exception):
     )
 
 
-@extractor_errors.register(priviblur_exceptions.TumblrRestrictedTagError)
+@extractor_errors.register(hyperblur_exceptions.TumblrRestrictedTagError)
 async def tumblr_error_restricted_tag(request, exception):
     return await request.app.ctx.render(
         "misc/msg_error",
@@ -58,7 +58,7 @@ async def tumblr_error_restricted_tag(request, exception):
     )
 
 
-@extractor_errors.register(priviblur_exceptions.TumblrBlogNotFoundError)
+@extractor_errors.register(hyperblur_exceptions.TumblrBlogNotFoundError)
 async def tumblr_error_unknown_blog(request, exception):
     return await request.app.ctx.render(
         "misc/msg_error",
@@ -76,7 +76,7 @@ async def tumblr_error_unknown_blog(request, exception):
     )
 
 
-@extractor_errors.register(priviblur_exceptions.TumblrNon200NorJSONResponse)
+@extractor_errors.register(hyperblur_exceptions.TumblrNon200NorJSONResponse)
 async def tumblr_error_debug_non_json_response_error(request, exception):
     return await request.app.ctx.render(
         "misc/msg_error",
@@ -84,13 +84,13 @@ async def tumblr_error_debug_non_json_response_error(request, exception):
             "app": request.app,
             "exception": exception,
             "error_heading": f"Non 200 status code. Tumblr returned {exception.status_code} ",
-            "error_description": "Priviblur might have been ratelimited by Tumblr. Please try again later.",
+            "error_description": "Hyperblur might have been ratelimited by Tumblr. Please try again later.",
         },
         status=500,
     )
 
 
-@extractor_errors.register(priviblur_exceptions.TumblrRatelimitReachedError)
+@extractor_errors.register(hyperblur_exceptions.TumblrRatelimitReachedError)
 async def tumblr_error_ratelimit(request, exception):
     return await request.app.ctx.render(
         "misc/msg_error",

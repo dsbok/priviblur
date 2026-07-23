@@ -13,15 +13,15 @@ async def get_media(
     url = f"{base_url}/{path_to_request}"
     try:
         async with client.get(url, headers=additional_headers) as tumblr_response:
-            priviblur_response_headers = {}
+            hyperblur_response_headers = {}
             for header_key, header_value in tumblr_response.headers.items():
                 if header_key.lower() not in request.app.ctx.BLACKLIST_RESPONSE_HEADERS:
-                    priviblur_response_headers[header_key] = header_value
+                    hyperblur_response_headers[header_key] = header_value
 
             if tumblr_response.status == 200:
-                priviblur_response_headers["Cache-Control"] = "public, max-age=31536000, immutable"
+                hyperblur_response_headers["Cache-Control"] = "public, max-age=31536000, immutable"
             elif tumblr_response.status == 301:
-                if location := priviblur_response_headers.get("location"):
+                if location := hyperblur_response_headers.get("location"):
                     location = request.app.ctx.URL_HANDLER(location)
                     if not location.startswith("/"):
                         raise exceptions.TumblrInvalidRedirect()
@@ -30,15 +30,15 @@ async def get_media(
             elif tumblr_response.status in (429, 500, 502, 503, 504):
                 return sanic.response.empty(status=502)
 
-            priviblur_response = await request.respond(headers=priviblur_response_headers, status=tumblr_response.status)
+            hyperblur_response = await request.respond(headers=hyperblur_response_headers, status=tumblr_response.status)
 
             try:
                 async for chunk in tumblr_response.content.iter_chunked(65536):
-                    await priviblur_response.send(chunk)
+                    await hyperblur_response.send(chunk)
             except (asyncio.CancelledError, ConnectionResetError):
                 pass
             finally:
-                await priviblur_response.eof()
+                await hyperblur_response.eof()
 
     except (aiohttp.ClientError, asyncio.TimeoutError):
         return sanic.response.empty(status=504)

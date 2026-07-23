@@ -1,17 +1,17 @@
 services:
-  priviblur:
+  hyperblur:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    container_name: priviblur
+    container_name: hyperblur
     restart: unless-stopped
     ports:
       - "0.0.0.0:8010:8000"
     environment:
-      - PRIVIBLUR_DEPLOYMENT_HOST=0.0.0.0
-      - PRIVIBLUR_DEPLOYMENT_PORT=8000
-      - PRIVIBLUR_DEPLOYMENT_HTTPS=true
-      - PRIVIBLUR_DEPLOYMENT_WORKERS=4
+      - HYPERBLUR_DEPLOYMENT_HOST=0.0.0.0
+      - HYPERBLUR_DEPLOYMENT_PORT=8000
+      - HYPERBLUR_DEPLOYMENT_HTTPS=true
+      - HYPERBLUR_DEPLOYMENT_WORKERS=4
       # Uncomment to allow viewing blogs that require being logged in
-      # - PRIVIBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
+      # - HYPERBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
 

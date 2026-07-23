@@ -225,7 +225,7 @@ async def format_npf(
 
     - Replaces internal Parser and Formatter with the modified variants above
     - Accepts extra arguments to add additional details to formatted results
-    - Automatically sets Priviblur-specific rendering arguments
+    - Automatically sets Hyperblur-specific rendering arguments
 
     Arguments (new):
         blog_name:

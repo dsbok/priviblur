@@ -2,7 +2,7 @@ import urllib.parse
 
 import sanic
 
-from .. import priviblur_extractor
+from .. import hyperblur_extractor
 
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 
@@ -20,14 +20,14 @@ async def _handle_explore(request, endpoint, post_type=None):
             raw = await request.app.ctx.TumblrAPI.explore_trending(
                 continuation=continuation
             )
-            timeline = priviblur_extractor.parse_timeline(raw)
+            timeline = hyperblur_extractor.parse_timeline(raw)
 
             title = request.app.ctx.translate(request.ctx.language, "explore_trending_page_title")
         case "explore._today":
             raw = await request.app.ctx.TumblrAPI.explore_today(
                 continuation=continuation
             )
-            timeline = priviblur_extractor.parse_timeline(raw)
+            timeline = hyperblur_extractor.parse_timeline(raw)
             title = request.app.ctx.translate(
                 request.ctx.language, "explore_today_on_tumblr_page_title"
             )
@@ -36,7 +36,7 @@ async def _handle_explore(request, endpoint, post_type=None):
                 continuation=continuation,
                 post_type=post_type,
             )
-            timeline = priviblur_extractor.parse_timeline(raw)
+            timeline = hyperblur_extractor.parse_timeline(raw)
             title = request.app.ctx.translate(request.ctx.language, "explore_trending_page_title")
 
     return await request.app.ctx.render(

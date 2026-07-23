@@ -17,10 +17,10 @@ async def request_timeout(request, exception):
             "app": request.app,
             "exception": exception,
             "error_heading": request.app.ctx.translate(
-                request.ctx.language, "priviblur_error_request_to_tumblr_timed_out_heading"
+                request.ctx.language, "hyperblur_error_request_to_tumblr_timed_out_heading"
             ),
             "error_description": request.app.ctx.translate(
-                request.ctx.language, "priviblur_error_request_to_tumblr_timed_out_description"
+                request.ctx.language, "hyperblur_error_request_to_tumblr_timed_out_description"
             ),
         },
         status=504,
@@ -49,7 +49,7 @@ async def invalid_redirect(request, exception):
             "app": request.app,
             "exception": exception,
             "error_heading": request.app.ctx.translate(
-                request.ctx.language, "priviblur_error_invalid_internal_tumblr_redirect"
+                request.ctx.language, "hyperblur_error_invalid_internal_tumblr_redirect"
             ),
         },
         status=502,
