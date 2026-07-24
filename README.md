@@ -25,10 +25,6 @@ services:
     ports:
       - "0.0.0.0:8010:8000"
     environment:
-      - HYPERBLUR_DEPLOYMENT_HOST=0.0.0.0
-      - HYPERBLUR_DEPLOYMENT_PORT=8000
-      - HYPERBLUR_DEPLOYMENT_HTTPS=true
-      - HYPERBLUR_DEPLOYMENT_WORKERS=4
       # Uncomment to allow viewing blogs that require being logged in
       # - HYPERBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
 
@@ -65,9 +61,6 @@ docker build -t hyperblur:latest -f Dockerfile .
 docker run -d \
   --name hyperblur \
   -p 8010:8000 \
-  -e HYPERBLUR_DEPLOYMENT_HOST=0.0.0.0 \
-  -e HYPERBLUR_DEPLOYMENT_PORT=8000 \
-  -e HYPERBLUR_DEPLOYMENT_WORKERS=4 \
   hyperblur:latest
 
 ```
@@ -80,10 +73,6 @@ All application configuration parameters can be passed via environment variables
 
 | Variable | Default | Description |
 | --- | --- | --- |
-| `HYPERBLUR_DEPLOYMENT_HOST` | `0.0.0.0` | IP address the Sanic web server binds to inside container |
-| `HYPERBLUR_DEPLOYMENT_PORT` | `8000` | Internal container TCP port |
-| `HYPERBLUR_DEPLOYMENT_HTTPS` | `true` | Enables secure cookie flags and HTTPS header policies |
-| `HYPERBLUR_DEPLOYMENT_WORKERS` | `4` | Number of concurrent web server worker processes |
 | `HYPERBLUR_TUMBLR_AUTHORIZATION` | *(Optional)* | Tumblr OAuth / Bearer token to access private or log-in restricted blogs |
 
 ---

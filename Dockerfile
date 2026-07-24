@@ -3,8 +3,7 @@ WORKDIR /hyperblur
 
 COPY ./requirements.txt ./requirements.txt
 
-ENV HYPERBLUR_HOST=0.0.0.0
-ENV HYPERBLUR_PORT=8000
+
 
 
 RUN apk update && apk upgrade --no-cache && \

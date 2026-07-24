@@ -4,11 +4,10 @@ import tomllib
 from typing import NamedTuple, Optional, Union
 
 class DeploymentConfig(NamedTuple):
-    host: str = "127.0.0.1"
-    port: int = 8080
+    host: str = "0.0.0.0"
+    port: int = 8000
     domain: Optional[str] = None
-    https: bool = False
-    workers: int = 1
+    https: bool = True
 
 
 class HyperblurBackendConfig(NamedTuple):

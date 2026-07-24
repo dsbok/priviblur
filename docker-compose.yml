@@ -6,9 +6,5 @@ services:
     ports:
       - "0.0.0.0:8010:8000"
     environment:
-      - HYPERBLUR_DEPLOYMENT_HOST=0.0.0.0
-      - HYPERBLUR_DEPLOYMENT_PORT=8000
-      - HYPERBLUR_DEPLOYMENT_HTTPS=true
-      - HYPERBLUR_DEPLOYMENT_WORKERS=4
       # Uncomment to allow viewing blogs that require being logged in
       # - HYPERBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
