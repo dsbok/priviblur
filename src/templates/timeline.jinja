@@ -4,6 +4,13 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/assets/css/timeline.css?v={{app.ctx.CURRENT_COMMIT}}">
     <link rel="alternate" type="application/rss+xml" href="{{request.path}}/rss{{add_query(request.query_string)}}"/>
+    {% if timeline.next %}
+        {% if query_args is defined %}
+            <link rel="prefetch" href="{{request.path}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}">
+        {% else %}
+            <link rel="prefetch" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}">
+        {% endif %}
+    {% endif %}
 {% endblock %}
 {% block title %}{{title}}{% endblock%}
 

@@ -2,6 +2,13 @@
 {% block head %}
 <link rel="preload" href="/assets/css/blog.css?v={{app.ctx.CURRENT_COMMIT}}" as="style">
 <link rel="stylesheet" type="text/css" href="/assets/css/blog.css?v={{app.ctx.CURRENT_COMMIT}}">
+{% if blog.next %}
+    {% if query_args is defined %}
+        <link rel="prefetch" href="{{request.path}}{{add_query(query_args | update_query_params("continuation", blog.next.cursor))}}">
+    {% else %}
+        <link rel="prefetch" href="{{request.path}}?continuation={{blog.next.cursor | urlencode}}">
+    {% endif %}
+{% endif %}
 {%- block child_block_include -%}{%- endblock -%}
 {% endblock %}
 {% block title -%}
