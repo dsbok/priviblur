@@ -3,7 +3,7 @@ WORKDIR /hyperblur
 
 COPY ./requirements.txt ./requirements.txt
 
-
+ENV PYTHON_JIT=1
 
 
 RUN apk update && apk upgrade --no-cache && \

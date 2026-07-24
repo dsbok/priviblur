@@ -116,7 +116,7 @@ async def get_media(request, client: aiohttp.ClientSession, path_to_request, add
 
             hyperblur_response = await request.respond(headers=hyperblur_response_headers, status=tumblr_response.status)
             try:
-                async for chunk in tumblr_response.content.iter_chunked(65536):
+                async for chunk in tumblr_response.content.iter_any():
                     await hyperblur_response.send(chunk)
             except (asyncio.CancelledError, ConnectionResetError):
                 pass
