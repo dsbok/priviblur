@@ -296,10 +296,14 @@ blogs = sanic.Blueprint("blogs", url_prefix="")
 async def _blog_posts(request: sanic.Request, blog: str):
     blog = urllib.parse.unquote(blog)
     continuation = urllib.parse.unquote(request.args.get("continuation")) if request.args.get("continuation") else None
+    page = request.args.get("page")
+    offset = None
+    if page and page.isdigit():
+        offset = (int(page) - 1) * 20
     before_id = urllib.parse.unquote(request.args.get("before_id")) if request.args.get("before_id") else None
     before_ts = urllib.parse.unquote(request.args.get("before")) if request.args.get("before") else None
 
-    raw = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation=continuation, before_id=before_id, before=before_ts)
+    raw = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation=continuation, before_id=before_id, before=before_ts, offset=offset)
     blog_timeline = hyperblur_extractor.parse_blog_timeline(raw)
     return await request.app.ctx.render("blog/blog", context={"app": request.app, "blog": blog_timeline})
 

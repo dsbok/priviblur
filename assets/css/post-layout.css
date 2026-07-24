@@ -62,7 +62,7 @@ a.inline-link, a.inline-mention {
 }
 
 .link-block {
-  border-radius: 0px;
+  border-radius: 8px;
   border: 2px solid #ffffff;
   margin-bottom: 15px;
   color: var(--color-text);
@@ -70,7 +70,7 @@ a.inline-link, a.inline-mention {
 }
 
 .poster-overlay-text, .poster-container > img {
-  border-radius: 0px;
+  border-radius: 8px;
 }
 
 .poster-container {
@@ -149,7 +149,7 @@ a.inline-link, a.inline-mention {
 
 .poll-choice {
   border: 2px solid #ffffff;
-  border-radius: 0px;
+  border-radius: 8px;
   color: var(--color-poll-text-color);
   background: var(--color-poll-choice-bg);
   padding: 8px 18px;
@@ -162,7 +162,7 @@ a.inline-link, a.inline-mention {
 
 .vote-proportion {
   background: var(--color-poll-proportion-bar-bg);
-  border-radius: 0px;
+  border-radius: 8px;
 }
 
 .poll-winner {
@@ -233,13 +233,13 @@ a.toggle-poll-results {
 .img-alt-text details {
   color: var(--color-post-img-alt-text-widget-text);
   background: var(--color-post-img-alt-text-widget-bg);
-  border-radius: 0px;
+  border-radius: 8px;
   border: 2px solid #ffffff;
   padding: 5px 10px;
 }
 
 .img-alt-text summary {
-  border-radius: 0px;
+  border-radius: 8px;
   font-weight: bold;
   list-style: none;
 }

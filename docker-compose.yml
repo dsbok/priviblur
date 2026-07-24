@@ -1,6 +1,7 @@
 services:
   hyperblur:
     image: ghcr.io/dsbok/hyperblur:latest
+    pull_policy: always
     container_name: hyperblur
     restart: unless-stopped
     ports:

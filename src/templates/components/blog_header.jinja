@@ -9,9 +9,25 @@
     <a href="/{{blog.blog_info.name}}"><img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" src="{{url_handler(blog.blog_info.avatar[-2].url)}}"/></a>
     <div class="blog-header-textual-content">
         {%- if blog.blog_info.title -%} <h1 id="blog-title">{{blog.blog_info.title | e}}</h1> {%- endif -%}
-        <p class="blog-name"><a href="/{{blog.blog_info.name | e}}">@{{blog.blog_info.name | e}}</a></p>
+        <div style="display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap;">
+            <p class="blog-name" style="margin: 0;"><a href="/{{blog.blog_info.name | e}}">@{{blog.blog_info.name | e}}</a></p>
+            <a href="/{{blog.blog_info.name | e}}/archive" class="button" style="padding: 2px 8px; font-size: 0.8em; text-decoration: none; border-radius: 4px; background: var(--bg-surface-secondary); color: var(--text-primary); border: 1px solid var(--border-color);">Go to Timeline</a>
+        </div>
+        
         <div id="blog-description">
             {{- content_tag -}}
         </div>
+
+        <details style="margin-top: 15px; font-size: 0.85em; text-align: left; background: var(--color-search-bar-bg); padding: 10px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); width: 100%; box-sizing: border-box;">
+            <summary style="cursor: pointer; color: var(--color-text-secondary); font-weight: 500;">Blog Metadata & Info</summary>
+            <div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: var(--color-text-secondary);">
+                <div><strong>ID / UUID:</strong> {{ blog.blog_info.uuid }}</div>
+                <div><strong>Theme Font:</strong> {{ blog.blog_info.theme.body_font | default('Default') }}</div>
+                <div><strong>Adult Content:</strong> {{ 'Yes' if blog.blog_info.is_adult else 'No' }}</div>
+                <div><strong>Total Posts:</strong> {{ blog.total_posts | default('Unknown') }}</div>
+                <div><strong>Requires Login:</strong> {{ 'Yes' if blog.blog_info.requires_account_to_view else 'No' }}</div>
+                <div><strong>Avatar Shape:</strong> {{ blog.blog_info.theme.avatar_shape | default('Unknown') }}</div>
+            </div>
+        </details>
     </div>
 </header>

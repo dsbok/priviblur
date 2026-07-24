@@ -1,18 +1,18 @@
 {% from 'post/components/header.jinja' import create_post_header  %}
-{% set has_media = false %}
+{% set media_checker = namespace(has_media=false) %}
 {% for block in element.content %}
-    {% if block.type in ["image", "video", "audio"] %}
-        {% set has_media = true %}
+    {% if block.get("type", "") in ["image", "video", "audio"] %}
+        {% set media_checker.has_media = true %}
     {% endif %}
 {% endfor %}
 {% for trail_item in element.trail %}
     {% for block in trail_item.content %}
-        {% if block.type in ["image", "video", "audio"] %}
-            {% set has_media = true %}
+        {% if block.get("type", "") in ["image", "video", "audio"] %}
+            {% set media_checker.has_media = true %}
         {% endif %}
     {% endfor %}
 {% endfor %}
-<div class="post {% if not has_media %}text-only{% endif %}" data-post-id="{{element.id}}">
+<div class="post {% if not media_checker.has_media %}text-only{% endif %}" data-post-id="{{element.id}}">
     {%- if post_url is not defined -%} 
         {%- set post_url = element.blog.name|e + "/" + element.id | e -%}
         {%- if element.slug -%}

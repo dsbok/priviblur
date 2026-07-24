@@ -1176,7 +1176,7 @@ class TumblrAPI:
         )
 
     async def blog_posts(
-        self, blog_name, continuation=None, tag=None, post_type=None, before_id=None, before=None
+        self, blog_name, continuation=None, tag=None, post_type=None, before_id=None, before=None, offset=None
     ):
         url_parameters = {
             "fields[blogs]": BLOG_POSTS_BLOG_INFO_FIELDS,
@@ -1192,6 +1192,8 @@ class TumblrAPI:
             url_parameters["before_id"] = before_id
         if before:
             url_parameters["before"] = before
+        if offset is not None:
+            url_parameters["offset"] = offset
         if continuation:
             url_parameters["tumblelog"] = blog_name
             url_parameters["page_number"] = continuation

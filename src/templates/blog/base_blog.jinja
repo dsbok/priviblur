@@ -41,14 +41,11 @@
     <script>
         function applyMediaFilter() {
             const filter = document.getElementById("media-filter").value;
-            const textOnlyPosts = document.querySelectorAll(".post.text-only");
-            
             if (filter === "media-only") {
-                textOnlyPosts.forEach(post => post.style.display = "none");
+                document.body.classList.add("media-only-mode");
             } else {
-                textOnlyPosts.forEach(post => post.style.display = "block");
+                document.body.classList.remove("media-only-mode");
             }
-            
             // Save preference to localStorage
             localStorage.setItem("mediaFilterPreference", filter);
         }
@@ -62,17 +59,59 @@
             }
         });
     </script>
+    <style>
+        body.media-only-mode .post.text-only {
+            display: none !important;
+        }
+    </style>
     
     {%- block blog_contents %}
     {%- endblock %}
 
-    {%- if blog.next %}
-        <div class="paging">
-            {% block paging %}
-                <a class="primary next-page button" href="{{request.path}}?continuation={{blog.next.cursor | urlencode}}#m">
-                    {{translate(request.ctx.language, "pagination_next_page")}}
-                </a>
-            {% endblock%}
+    {%- if blog.next or request.args.get('page') %}
+        <div class="paging" style="display: flex; gap: 8px; justify-content: center; align-items: center; margin-top: 20px; flex-wrap: wrap;">
+            {% set current_page = (request.args.get('page') | default(1) | int) %}
+            {% set current_page = current_page if current_page > 0 else 1 %}
+            {% set total_pages = ((blog.total_posts | default(0)) // 20) + 1 if blog.total_posts else 0 %}
+            
+            {% if current_page > 1 %}
+                <a class="button" href="{{request.path}}?page={{current_page - 1}}#m" style="padding: 6px 12px; background: var(--color-top-level-card-bg); border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: var(--color-text); text-decoration: none;">&laquo; Prev</a>
+            {% endif %}
+
+            {% if total_pages > 0 %}
+                {% set start_page = current_page - 2 %}
+                {% set end_page = current_page + 2 %}
+                {% if start_page < 1 %}{% set start_page = 1 %}{% endif %}
+                {% if end_page > total_pages %}{% set end_page = total_pages %}{% endif %}
+
+                {% if start_page > 1 %}
+                    <a class="button" href="{{request.path}}?page=1#m" style="padding: 6px 10px; background: var(--color-top-level-card-bg); border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: var(--color-text); text-decoration: none;">1</a>
+                    {% if start_page > 2 %}<span style="color: var(--color-text-secondary);">...</span>{% endif %}
+                {% endif %}
+
+                {% for p in range(start_page, end_page + 1) %}
+                    {% if p == current_page %}
+                        <span style="padding: 6px 10px; background: var(--color-logo); border-radius: 6px; color: white; font-weight: bold;">{{ p }}</span>
+                    {% else %}
+                        <a class="button" href="{{request.path}}?page={{ p }}#m" style="padding: 6px 10px; background: var(--color-top-level-card-bg); border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: var(--color-text); text-decoration: none;">{{ p }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if end_page < total_pages %}
+                    {% if end_page < total_pages - 1 %}<span style="color: var(--color-text-secondary);">...</span>{% endif %}
+                    <a class="button" href="{{request.path}}?page={{ total_pages }}#m" style="padding: 6px 10px; background: var(--color-top-level-card-bg); border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: var(--color-text); text-decoration: none;">{{ total_pages }}</a>
+                {% endif %}
+            {% else %}
+                <span style="padding: 6px 12px; color: var(--color-text-secondary);">Page {{ current_page }}</span>
+            {% endif %}
+
+            {% if current_page < total_pages or blog.next %}
+                <a class="primary next-page button" href="{{request.path}}?page={{current_page + 1}}#m" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Next &raquo;</a>
+            {% endif %}
+            
+            {% if total_pages > 0 and current_page < total_pages %}
+                <a class="button" href="{{request.path}}?page={{total_pages}}#m" style="padding: 6px 12px; background: var(--color-top-level-card-bg); border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: var(--color-text); text-decoration: none;">Last Page</a>
+            {% endif %}
         </div>
     {% endif %}
 {%- endblock %}

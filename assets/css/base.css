@@ -1,8 +1,4 @@
-/* Sharp Dark Grey Theme - Pure HTML/CSS/AJAX */
-
-* {
-    border-radius: 0 !important;
-}
+/* Professional Smooth Dark Theme - Pure HTML/CSS/AJAX */
 
 :root {
     --ON: initial;
@@ -10,44 +6,45 @@
 }
 
 body {
-    --color-background: #1e1e1e;
-    --color-top-level-card-bg: #282828;
-    --color-text: #ffffff;
+    --color-background: #09090b;
+    --color-top-level-card-bg: #18181b;
+    --color-text: #e4e4e7;
+    --color-text-secondary: #a1a1aa;
 
-    --color-nav-bar-icon: #aaaaaa;
-    --color-nav-bar-icon-hover: #3399ff;
-    --color-nav-bar-selected-tab-highlight: #3399ff;
-    --color-search-icon-fill: #aaaaaa;
-    --color-search-bar-bg: #141414;
-    --color-logo: #3399ff;
+    --color-nav-bar-icon: #71717a;
+    --color-nav-bar-icon-hover: #3b82f6;
+    --color-nav-bar-selected-tab-highlight: #3b82f6;
+    --color-search-icon-fill: #71717a;
+    --color-search-bar-bg: #000000;
+    --color-logo: #3b82f6;
 
-    --color-footer-text: #aaaaaa;
+    --color-footer-text: #71717a;
 
     --color-community-label-text: #ffffff;
     --color-community-label-button-text: #ffffff;
-    --color-community-label-button-bg: #0066cc;
-    --color-community-label-button-highlight: #3399ff;
-    --color-community-label-button-hover: #3399ff;
-    --color-community-label-gradient-1: #282828;
-    --color-community-label-gradient-2: rgba(40,40,40,0.95);
+    --color-community-label-button-bg: #2563eb;
+    --color-community-label-button-highlight: #3b82f6;
+    --color-community-label-button-hover: #3b82f6;
+    --color-community-label-gradient-1: #18181b;
+    --color-community-label-gradient-2: rgba(24,24,27,0.95);
 
-    --color-post-blog-name: #3399ff;
-    --color-reblog-attribution: #aaaaaa;
-    --color-post-link-block-subtitle: #aaaaaa;
-    --color-post-header-date-separator: #777777;
+    --color-post-blog-name: #60a5fa;
+    --color-reblog-attribution: #a1a1aa;
+    --color-post-link-block-subtitle: #a1a1aa;
+    --color-post-header-date-separator: #52525b;
 
     --color-ask-header: #ffffff;
-    --color-ask-bg: #141414;
+    --color-ask-bg: #000000;
 
-    --color-post-img-alt-text-widget-bg: #141414;
-    --color-post-img-alt-text-widget-text: #ffffff;
+    --color-post-img-alt-text-widget-bg: #000000;
+    --color-post-img-alt-text-widget-text: #e4e4e7;
 
     --color-poll-text-color: #ffffff;
-    --color-poll-winner-bg: rgba(0, 102, 204, 0.3);
-    --color-poll-proportion-bar-bg: #333333;
-    --color-poll-choice-bg: #141414;
+    --color-poll-winner-bg: rgba(59, 130, 246, 0.3);
+    --color-poll-proportion-bar-bg: #27272a;
+    --color-poll-choice-bg: #09090b;
 
-    --color-post-reveal-truncated-content-button: #3399ff;
+    --color-post-reveal-truncated-content-button: #60a5fa;
     --color-post-reveal-truncated-content-button-hover: #66b2ff;
 
     --color-post-footer: #aaaaaa;
@@ -59,6 +56,17 @@ body {
 
     --color-post-notes-viewer-nav-bar-bg: #141414;
     --color-post-notes-viewer-nav-bar-item: #aaaaaa;
+    --color-read-more-text: #60a5fa;
+
+    --color-audio-controls-bg: #18181b;
+    --color-audio-play-button-bg: #f8fafc;
+    --color-audio-play-button-icon-fill: #18181b;
+
+    --color-text-link: #60a5fa;
+    --color-text-link-hover: #93c5fd;
+    --color-text-hashtag: #94a3b8;
+    --color-text-hashtag-hover: #cbd5e1;
+
     --color-reblog-note-separator: #444444;
 
     --color-primary-button-bg: #0066cc;
@@ -93,13 +101,17 @@ html, body, .container {
 }
 
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.4;
     background-color: var(--color-background);
     color: var(--color-text);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin-top: 0;
+    font-weight: 600;
 }
 
 p {
@@ -185,7 +197,7 @@ a.logo:hover {
 .search-bar {
     display: flex;
     width: 100%;
-    border-radius: 0;
+    border-radius: 8px;
     padding: 6px 10px;
     background: #141414;
     border: 1px solid #444444;
@@ -223,7 +235,7 @@ a.logo:hover {
     padding: 12px 16px;
     box-sizing: border-box;
     border-bottom: 2px solid transparent;
-    border-radius: 0;
+    border-radius: 8px;
 }
 
 .nav-tab:hover {
@@ -307,7 +319,7 @@ a.logo:hover {
     font-weight: 600;
     font-size: 12px;
     border: 1px solid #444444;
-    border-radius: 0;
+    border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
     background: #0066cc;
@@ -347,7 +359,7 @@ a.logo:hover {
     padding: 8px 0px;
     font-size: 13px;
     width: 100%;
-    border-radius: 0;
+    border-radius: 8px;
 }
 
 @media screen and (min-width: 768px) {
@@ -359,7 +371,7 @@ a.logo:hover {
         padding: 8px 16px;
         font-size: 13px;
         width: auto;
-        border-radius: 0;
+        border-radius: 8px;
     }
 }
 
@@ -380,7 +392,7 @@ a.logo:hover {
     font-size: 12px;
     font-weight: 500;
     border: 1px solid #444444;
-    border-radius: 0;
+    border-radius: 8px;
     box-sizing: border-box;
     position: relative;
     cursor: pointer;
@@ -404,7 +416,7 @@ li.control-bar-action:hover {
     list-style: None;
     background: #282828;
     border: 1px solid #444444;
-    border-radius: 0;
+    border-radius: 8px;
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
@@ -476,7 +488,7 @@ li.no-js .control-bar-dropdown-menu {
     width: 500px;
     margin: 0 20px;
     padding: 16px 20px;
-    border-radius: 0;
+    border-radius: 8px;
     border: 1px solid #444444;
     background: #282828;
 }
@@ -491,7 +503,7 @@ li.no-js .control-bar-dropdown-menu {
 }
 ::-webkit-scrollbar-thumb {
     background: #444444;
-    border-radius: 0;
+    border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #3399ff;
