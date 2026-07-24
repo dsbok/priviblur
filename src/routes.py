@@ -297,10 +297,37 @@ async def _blog_posts(request: sanic.Request, blog: str):
     blog = urllib.parse.unquote(blog)
     continuation = urllib.parse.unquote(request.args.get("continuation")) if request.args.get("continuation") else None
     before_id = urllib.parse.unquote(request.args.get("before_id")) if request.args.get("before_id") else None
+    before_ts = urllib.parse.unquote(request.args.get("before")) if request.args.get("before") else None
 
-    raw = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation=continuation, before_id=before_id)
+    raw = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation=continuation, before_id=before_id, before=before_ts)
     blog_timeline = hyperblur_extractor.parse_blog_timeline(raw)
     return await request.app.ctx.render("blog/blog", context={"app": request.app, "blog": blog_timeline})
+
+@blogs.get("/archive")
+async def _blog_archive(request: sanic.Request, blog: str):
+    import datetime
+    blog = urllib.parse.unquote(blog)
+    year = request.args.get("year")
+    month = request.args.get("month")
+    
+    if year and month:
+        try:
+            # End of selected month
+            y, m = int(year), int(month)
+            if m == 12:
+                next_y, next_m = y + 1, 1
+            else:
+                next_y, next_m = y, m + 1
+            dt = datetime.datetime(next_y, next_m, 1, tzinfo=datetime.timezone.utc)
+            timestamp = int(dt.timestamp())
+            return sanic.redirect(request.app.url_for("blogs._blog_posts", blog=blog, before=timestamp))
+        except ValueError:
+            pass
+            
+    # Default to fetching standard blog timeline for context
+    raw = await request.app.ctx.TumblrAPI.blog_posts(blog)
+    blog_timeline = hyperblur_extractor.parse_blog_timeline(raw)
+    return await request.app.ctx.render("blog/archive", context={"app": request.app, "blog": blog_timeline})
 
 @blogs.get("/tagged/<tag:str>")
 async def _blog_tags(request: sanic.Request, blog: str, tag: str):

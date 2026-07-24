@@ -22,14 +22,46 @@
 {% block center %}
     {%- include 'components/blog_header.jinja' -%}
 
-    <form class="blog-search-bar search-bar" method="get" action="/{{blog.blog_info.name}}/search" autocomplete="off">
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <form class="blog-search-bar search-bar" method="get" action="/{{blog.blog_info.name}}/search" autocomplete="off" style="flex: 1; margin: 0;">
         {{-search_icon(20, 20)}}
         {%- if blog_search_query is defined -%}
             <input name="q" type="text" value="{{blog_search_query | e}}" placeholder="{{translate(request.ctx.language, "blog_search_placeholder_text")}}"></input>
         {%- else -%}
             <input name="q" type="text" placeholder={{translate(request.ctx.language, "blog_search_placeholder_text")}}></input>
         {%- endif -%}
-    </form>
+        </form>
+
+        <select id="media-filter" style="padding: 10px; border-radius: 4px; background: var(--bg-surface-secondary); color: var(--text-primary); border: 1px solid var(--border-color); cursor: pointer;" onchange="applyMediaFilter()">
+            <option value="all">All Posts</option>
+            <option value="media-only">Media Only (Hide Text Posts)</option>
+        </select>
+    </div>
+
+    <script>
+        function applyMediaFilter() {
+            const filter = document.getElementById("media-filter").value;
+            const textOnlyPosts = document.querySelectorAll(".post.text-only");
+            
+            if (filter === "media-only") {
+                textOnlyPosts.forEach(post => post.style.display = "none");
+            } else {
+                textOnlyPosts.forEach(post => post.style.display = "block");
+            }
+            
+            // Save preference to localStorage
+            localStorage.setItem("mediaFilterPreference", filter);
+        }
+
+        // Apply on load
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedFilter = localStorage.getItem("mediaFilterPreference");
+            if (savedFilter) {
+                document.getElementById("media-filter").value = savedFilter;
+                applyMediaFilter();
+            }
+        });
+    </script>
     
     {%- block blog_contents %}
     {%- endblock %}

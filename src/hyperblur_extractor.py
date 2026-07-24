@@ -1176,7 +1176,7 @@ class TumblrAPI:
         )
 
     async def blog_posts(
-        self, blog_name, continuation=None, tag=None, post_type=None, before_id=None
+        self, blog_name, continuation=None, tag=None, post_type=None, before_id=None, before=None
     ):
         url_parameters = {
             "fields[blogs]": BLOG_POSTS_BLOG_INFO_FIELDS,
@@ -1190,6 +1190,8 @@ class TumblrAPI:
                 url_parameters["post_type"] = post_type
         if before_id:
             url_parameters["before_id"] = before_id
+        if before:
+            url_parameters["before"] = before
         if continuation:
             url_parameters["tumblelog"] = blog_name
             url_parameters["page_number"] = continuation
