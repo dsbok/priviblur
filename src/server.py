@@ -8,7 +8,7 @@ import aiohttp
 import orjson
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
-from . import routes, hyperblur_extractor, preferences, helpers, exceptions
+from . import routes, hyperblur_extractor, helpers, exceptions
 from .config import load_config
 
 
@@ -86,16 +86,6 @@ ENGLISH_STRINGS = {
     "settings_header": "Settings",
     "settings_language_selector": "Language",
     "settings_language_selector_desc": "Select which language you'd like Hyperblur to use",
-    "settings_theme_selector": "Theme",
-    "settings_theme_selector_desc": "Select your display theme",
-    "settings_theme_selector_option_auto": "Auto",
-    "settings_theme_selector_option_light": "Light",
-    "settings_theme_selector_option_dark": "Dark",
-    "settings_save_changes": "Save Changes",
-    "settings_cancel_changes": "Cancel",
-    "settings_copy_as_bookmarklet": "Copy as bookmarklet",
-    "settings_copy_as_bookmarklet_confirmed": "Copied",
-    "settings_copy_as_bookmarklet_failed": "Unable to copy",
     "hyperblur_licences_page_title": "Licences",
     "post_note_viewer_view_replies_tab_title": "Replies",
     "post_note_viewer_view_reblogs_tab_title": "Reblogs",
@@ -105,8 +95,6 @@ ENGLISH_STRINGS = {
     "post_note_viewer_view_reblogs_filter_reblogs_only": "Other reblogs",
     "post_note_viewer_view_replies_filter_sort_oldest": "Oldest first",
     "post_note_viewer_view_replies_filter_sort_newest": "Newest first",
-    "settings_expand_blogger_truncated_posts": "Expand posts",
-    "settings_expand_blogger_truncated_posts_desc": "Expands truncated posts automatically",
     "npf_renderer_asker_with_no_attribution": "Anonymous",
     "npf_renderer_asker_and_ask_verb": "{name} asked",
     "npf_renderer_unsupported_block_header": "Unsupported NPF block",
@@ -256,11 +244,7 @@ async def robotstxt_route(request):
 
 @app.middleware("request", priority=1)
 async def before_all_routes(request):
-    request.ctx.preferences = preferences.UserPreferences(
-        **config.default_user_preferences._asdict()
-    )
-    request.ctx.language = request.ctx.preferences.language
-    request.ctx.preferences = request.ctx.preferences.replace_from_cookie(request)
+    request.ctx.language = request.app.ctx.HYPERBLUR_CONFIG.default_user_preferences.language
 
 
 @app.middleware("response")

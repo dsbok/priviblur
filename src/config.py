@@ -17,7 +17,6 @@ class HyperblurBackendConfig(NamedTuple):
 
 class DefaultUserPreferences(NamedTuple):
     language: str = "en_US"
-    theme: str = "auto"
     expand_posts: bool = False
 
 

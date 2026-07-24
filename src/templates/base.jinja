@@ -21,15 +21,7 @@
 
     <title>{% block title %}{% endblock %} {{translate(request.ctx.language, "page_title_suffix")}} </title>
 </head>
-<body class="
-{%- if request.ctx.preferences.theme =="light"-%}
-    light-theme
-{% elif request.ctx.preferences.theme =="dark"%}
-    dark-theme
-{%- else -%}
-    default-theme
-{%- endif -%}"
->
+<body>
     <div class="container">
         <nav class="navbar">
             <div class="left-section">
