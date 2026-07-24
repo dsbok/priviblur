@@ -24,7 +24,7 @@
 
     <div style="display: flex; gap: 10px; margin-bottom: 20px;">
         <form class="blog-search-bar search-bar" method="get" action="/{{blog.blog_info.name}}/search" autocomplete="off" style="flex: 1; margin: 0;">
-        {{-search_icon(20, 20)}}
+        <span>Search: </span>
         {%- if blog_search_query is defined -%}
             <input name="q" type="text" value="{{blog_search_query | e}}" placeholder="{{translate(request.ctx.language, "blog_search_placeholder_text")}}"></input>
         {%- else -%}

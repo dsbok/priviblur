@@ -39,7 +39,7 @@
                 {#- The reblog from data can sometimes have an empty blog name. Thus we'll extract the name from the root reblog info if they're the same -#}
                 {# Though sometimes the reblog data is just hidden #}
                     <div class="reblog-attribution">
-                        {{reblog_icon(16, 16)}}
+                        <span>[Reblogged from]</span>
                         {{create_reblog_attribution(element)}}
                     </div>
             {%- endif -%}
