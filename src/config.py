@@ -15,11 +15,6 @@ class HyperblurBackendConfig(NamedTuple):
     image_response_timeout: int = 30
 
 
-class DefaultUserPreferences(NamedTuple):
-    language: str = "en_US"
-    expand_posts: bool = False
-
-
 class MiscellaneousConfig(NamedTuple):
     dev_mode: bool = False
 
@@ -27,7 +22,6 @@ class MiscellaneousConfig(NamedTuple):
 class HyperblurConfig(NamedTuple):
     deployment: DeploymentConfig
     backend: HyperblurBackendConfig
-    default_user_preferences: DefaultUserPreferences
     misc: MiscellaneousConfig
 
 
@@ -58,7 +52,6 @@ def load_config(path: str) -> HyperblurConfig:
     config_sections = (
         (DeploymentConfig, "deployment", "deployment"),
         (HyperblurBackendConfig, "backend", "hyperblur_backend"),
-        (DefaultUserPreferences, "default_user_preferences", "default_user_preferences"),
         (MiscellaneousConfig, "misc", "misc"),
     )
 

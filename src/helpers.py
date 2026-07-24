@@ -326,7 +326,7 @@ class NPFFormatter(npf_renderer.format.Formatter):
             "forbid_external_iframes": forbid_external_iframes,
         }
         if request:
-            initialization_arguments["truncate"] = not request.app.ctx.HYPERBLUR_CONFIG.default_user_preferences.expand_posts
+            initialization_arguments["truncate"] = False
 
         super().__init__(**initialization_arguments)
         self.blog_name = blog_name

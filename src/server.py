@@ -244,7 +244,7 @@ async def robotstxt_route(request):
 
 @app.middleware("request", priority=1)
 async def before_all_routes(request):
-    request.ctx.language = request.app.ctx.HYPERBLUR_CONFIG.default_user_preferences.language
+    request.ctx.language = "en_US"
 
 
 @app.middleware("response")
