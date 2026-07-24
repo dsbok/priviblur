@@ -1,10 +1,10 @@
 services:
   hyperblur:
-    image: ghcr.io/dsbok/hyperblur:main
+    image: ghcr.io/dsbok/hyperblur:latest
     container_name: hyperblur
     restart: unless-stopped
     ports:
       - "0.0.0.0:8010:8000"
-    environment:
-      # Uncomment to allow viewing blogs that require being logged in
-      # - HYPERBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
+    # environment:
+    #   # Uncomment to allow viewing blogs that require being logged in
+    #   - HYPERBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
