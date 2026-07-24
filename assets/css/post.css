@@ -4,19 +4,16 @@
   gap: 16px;
   padding: 16px 20px;
   background: var(--color-top-level-card-bg);
-  
   border: 1px solid #000;
-  
+  border-bottom: 2px solid #333333;
+  margin-bottom: 20px;
   width: 100%;
   box-sizing: border-box;
   content-visibility: auto;
   contain-intrinsic-size: 100px 300px;
-  
 }
 
 .post:hover {
-  
-  
 }
 
 @media (max-width: 590px) {
@@ -41,7 +38,6 @@
 .ask-body {
   padding: 12px 14px 0;
   background: #111111;
-  
   border: 1px dashed #444444;
   width: 100%;
 }
@@ -70,9 +66,7 @@
 .avatar {
   width: 40px;
   height: 40px;
-  
   border: 1px solid #000;
-  
 }
 
 .avatar:hover {
@@ -134,8 +128,7 @@ a.blog-name:hover {
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  border-top: 1px solid #000;
+  border-top: 1px solid #333333;
   padding: 25px 0px;
 }
 
@@ -184,9 +177,8 @@ a.hidden-reblog {
   word-break: break-word;
 }
 
-.post-tag { display: inline-block; background: #333; color: #aaa; border: 1px solid #555; padding: 2px 4px; font-size: 12px; }
-
-.post-tag:hover { background: #444; color: #fff; }
+.post-tag { display: inline-block; background: transparent; color: #888888; padding: 2px 0px; font-size: 13px; text-decoration: none; }
+.post-tag:hover { color: #ffffff; text-decoration: underline; }
 
 .post-interaction {
   display: flex;
