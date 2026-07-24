@@ -295,8 +295,8 @@ blogs = sanic.Blueprint("blogs", url_prefix="")
 @blogs.get("/")
 async def _blog_posts(request: sanic.Request, blog: str):
     blog = urllib.parse.unquote(blog)
-    continuation = urllib.parse.unquote(request.args["continuation"]) if request.args.get("continuation") else None
-    before_id = urllib.parse.unquote(request.args["before_id"]) if request.args.get("before_id") else None
+    continuation = urllib.parse.unquote(request.args.get("continuation")) if request.args.get("continuation") else None
+    before_id = urllib.parse.unquote(request.args.get("before_id")) if request.args.get("before_id") else None
 
     raw = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation=continuation, before_id=before_id)
     blog_timeline = hyperblur_extractor.parse_blog_timeline(raw)
@@ -306,7 +306,7 @@ async def _blog_posts(request: sanic.Request, blog: str):
 async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     blog = urllib.parse.unquote(blog)
     tag = urllib.parse.unquote(tag)
-    continuation = urllib.parse.unquote(request.args["continuation"]) if request.args.get("continuation") else None
+    continuation = urllib.parse.unquote(request.args.get("continuation")) if request.args.get("continuation") else None
 
     raw = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation=continuation, tag=tag)
     blog_timeline = hyperblur_extractor.parse_blog_timeline(raw)
@@ -316,7 +316,7 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
 async def _blog_search(request: sanic.Request, blog: str, query: str):
     blog = urllib.parse.unquote(blog)
     query = urllib.parse.unquote(query)
-    continuation = urllib.parse.unquote(request.args["continuation"]) if request.args.get("continuation") else None
+    continuation = urllib.parse.unquote(request.args.get("continuation")) if request.args.get("continuation") else None
 
     try:
         raw = await request.app.ctx.TumblrAPI.blog_search(blog, query, continuation=continuation)
