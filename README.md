@@ -2,12 +2,19 @@
 
 Hyperblur is a ultra-fast, privacy-focused, lightweight alternative frontend for Tumblr. Built for maximum speed, security, and anonymity, it lets you browse Tumblr content without tracking and without an account. Hyperblur is a fork of https://github.com/syeopite/priviblur but with improvements.
 
-## Core Highlights & Features
+## Features
 
-- **Ultra-Fast Performance**: Zero external CDNs or frameworks. Pure HTML, CSS, and vanilla AJAX.
-- **Privacy & Anonymity**: All media proxies, API calls, and asset requests go through your backend container. Tumblr never receives direct user traffic or client IP addresses.
-- **One-Click Video Downloads**: Download videos directly from any post with a built-in download action button.
-- **Full Fallback Support**: Fully functional without JavaScript enabled. View blogs, read post notes, perform searches, and browse trending feeds seamless with pure HTML.
+- **Blazing Fast**: Eager media loading, background next-page prefetching, and unbounded proxy streaming for an instant browsing experience.
+- **Private by Default**: All API and media requests are reverse-proxied. Tumblr never sees your client IP.
+- **Lightweight**: Zero external CDNs or heavy JS frameworks. Works flawlessly with JavaScript disabled.
+- **Enhanced UX**: Built-in one-click video downloads and highly responsive feeds.
+
+## Technologies Used
+
+- **Sanic & uvloop**: High-performance asynchronous web server powering the backend.
+- **aiohttp**: Drives concurrent, zero-buffer proxying for raw media streams.
+- **Python 3.13 JIT**: Utilizes the experimental Tier 2 optimizer for maximum server execution speed.
+- **Jinja2**: Fast, server-side template rendering for minimal client-side overhead.
 
 ---
 
