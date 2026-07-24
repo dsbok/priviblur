@@ -32,7 +32,7 @@
         {%- endif -%}
         </form>
 
-        <select id="media-filter" style="padding: 10px; background: #fff; color: #000; border: 1px solid #000; cursor: pointer; font-family: inherit;" onchange="applyMediaFilter()">
+        <select id="media-filter"  onchange="applyMediaFilter()">
             <option value="all">All Posts</option>
             <option value="media-only">Media Only (Hide Text Posts)</option>
         </select>
@@ -75,7 +75,7 @@
             {% set total_pages = ((blog.total_posts | default(0)) // 20) + 1 if blog.total_posts else 0 %}
             
             {% if current_page > 1 %}
-                <a class="button" href="{{request.path}}?page={{current_page - 1}}#m" style="padding: 6px 12px; background: #fff; border: 1px solid #000; color: #000; text-decoration: none;">&laquo; Prev</a>
+                <a class="button" href="{{request.path}}?page={{current_page - 1}}#m" >&laquo; Prev</a>
             {% endif %}
 
             {% if total_pages > 0 %}
@@ -85,32 +85,32 @@
                 {% if end_page > total_pages %}{% set end_page = total_pages %}{% endif %}
 
                 {% if start_page > 1 %}
-                    <a class="button" href="{{request.path}}?page=1#m" style="padding: 6px 10px; background: #fff; border: 1px solid #000; color: #000; text-decoration: none;">1</a>
-                    {% if start_page > 2 %}<span style="color: #000;">...</span>{% endif %}
+                    <a class="button" href="{{request.path}}?page=1#m" >1</a>
+                    {% if start_page > 2 %}<span>...</span>{% endif %}
                 {% endif %}
 
                 {% for p in range(start_page, end_page + 1) %}
                     {% if p == current_page %}
-                        <span style="padding: 6px 10px; background: #000; color: #fff; border: 1px solid #000; font-weight: bold;">{{ p }}</span>
+                        <b>{{ p }}</b>
                     {% else %}
-                        <a class="button" href="{{request.path}}?page={{ p }}#m" style="padding: 6px 10px; background: #fff; border: 1px solid #000; color: #000; text-decoration: none;">{{ p }}</a>
+                        <a class="button" href="{{request.path}}?page={{ p }}#m" >{{ p }}</a>
                     {% endif %}
                 {% endfor %}
 
                 {% if end_page < total_pages %}
-                    {% if end_page < total_pages - 1 %}<span style="color: #000;">...</span>{% endif %}
-                    <a class="button" href="{{request.path}}?page={{ total_pages }}#m" style="padding: 6px 10px; background: #fff; border: 1px solid #000; color: #000; text-decoration: none;">{{ total_pages }}</a>
+                    {% if end_page < total_pages - 1 %}<span>...</span>{% endif %}
+                    <a class="button" href="{{request.path}}?page={{ total_pages }}#m" >{{ total_pages }}</a>
                 {% endif %}
             {% else %}
-                <span style="padding: 6px 12px; color: #000;">Page {{ current_page }}</span>
+                <span >Page {{ current_page }}</span>
             {% endif %}
 
             {% if current_page < total_pages or blog.next %}
-                <a class="primary next-page button" href="{{request.path}}?page={{current_page + 1}}#m" style="padding: 6px 12px; border: 1px solid #000; text-decoration: none; background: #fff; color: #000;">Next &raquo;</a>
+                <a class="primary next-page button" href="{{request.path}}?page={{current_page + 1}}#m" >Next &raquo;</a>
             {% endif %}
             
             {% if total_pages > 0 and current_page < total_pages %}
-                <a class="button" href="{{request.path}}?page={{total_pages}}#m" style="padding: 6px 12px; background: #fff; border: 1px solid #000; color: #000; text-decoration: none;">Last Page</a>
+                <a class="button" href="{{request.path}}?page={{total_pages}}#m" >Last Page</a>
             {% endif %}
         </div>
     {% endif %}

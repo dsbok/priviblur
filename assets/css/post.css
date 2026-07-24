@@ -40,7 +40,7 @@
 
 .ask-body {
   padding: 12px 14px 0;
-  background: #f4f4f4;
+  background: #111111;
   
   border: 1px dashed #444444;
   width: 100%;
@@ -54,7 +54,7 @@
 }
 
 .reblog-attribution .blog-name {
-  color: #0000EE;
+  color: #5555FF;
 }
 
 .reblog-attribution .icon path {
@@ -94,7 +94,7 @@
 }
 
 a.blog-name {
-  color: #0000EE;
+  color: #5555FF;
   font-weight: bold;
   align-self: center;
   word-break: break-word;
@@ -102,7 +102,7 @@ a.blog-name {
 
 a.blog-name:hover {
   align-self: center;
-  color: #0000EE;
+  color: #5555FF;
   text-decoration: underline;
 }
 
@@ -184,23 +184,9 @@ a.hidden-reblog {
   word-break: break-word;
 }
 
-.post-tag {
-  display: inline-block;
-  background: #eeeeee;
-  
-  border: 1px solid #000;
-  padding: 3px 8px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #0000EE;
-  
-}
+.post-tag { display: inline-block; background: #333; color: #aaa; border: 1px solid #555; padding: 2px 4px; font-size: 12px; }
 
-.post-tag:hover {
-  background: #dddddd;
-  color: #0000EE;
-  border-color: #0000EE;
-}
+.post-tag:hover { background: #444; color: #fff; }
 
 .post-interaction {
   display: flex;
@@ -277,22 +263,20 @@ a.hidden-reblog {
 }
 
 .unblur-post-button.button, .no-js-view-community-post-instruction {
-  background: #ffffff; color: #000000; border: 1px solid #000000;
+  background: #ffffff; color: #ffffff; border: 1px solid #000000;
   padding: 5px 15px;
   
   font-weight: bold;
   font-size: 14px;
-  color: #000000;
+  color: #ffffff;
   border: 1px solid #000;
   margin-top: 25px;
 }
 
-.unblur-post-button.button:hover {
-  background: #0055aa;
-}
+.unblur-post-button
 
 .post-notes {
-  background: #ffffff; border: 1px solid #000;
+  background: #000000; border: 1px solid #333;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -308,7 +292,7 @@ a.hidden-reblog {
   gap: 50px;
   list-style: none;
   padding: 0 20px;
-  background: #f4f4f4;
+  background: #111111;
   
   border: 1px solid #000;
   margin: 0 15px;
@@ -322,7 +306,7 @@ a.hidden-reblog {
 .post-notes-nav li.selected {
   border-width: 0 0 3px;
   border-style: solid;
-  border-color: #0000EE;
+  border-color: #5555FF;
 }
 
 .post-notes-nav a {
@@ -396,7 +380,7 @@ a.hidden-reblog {
 
 .post-notes > footer > a {
   font-weight: 550;
-  color: #0000EE;
+  color: #5555FF;
 }
 
 .post-notes > header > #timeline-control-bar {
@@ -419,7 +403,7 @@ a.hidden-reblog {
   top: 10px;
   right: 10px;
   background: rgba(0, 0, 0, 0.8);
-  color: #000000;
+  color: #ffffff;
   
   padding: 6px;
   display: flex;
@@ -432,7 +416,7 @@ a.hidden-reblog {
 }
 
 .video-download-btn:hover {
-  background: #ffffff; color: #000000; border: 1px solid #000000;
+  background: #ffffff; color: #ffffff; border: 1px solid #000000;
 }
 
 .video-download-btn:active {

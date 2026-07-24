@@ -6,95 +6,97 @@
 }
 
 
+
 body {
-    --color-background: #ffffff;
-    --color-top-level-card-bg: #ffffff;
-    --color-text: #000000;
-    --color-text-secondary: #333333;
+    --color-background: #000000;
+    --color-top-level-card-bg: #000000;
+    --color-text: #ffffff;
+    --color-text-secondary: #aaaaaa;
 
-    --color-nav-bar-icon: #000000;
-    --color-nav-bar-icon-hover: #0000EE;
-    --color-nav-bar-selected-tab-highlight: #000000;
-    --color-search-icon-fill: #000000;
-    --color-search-bar-bg: #ffffff;
-    --color-logo: #000000;
+    --color-nav-bar-icon: #ffffff;
+    --color-nav-bar-icon-hover: #5555FF;
+    --color-nav-bar-selected-tab-highlight: #ffffff;
+    --color-search-icon-fill: #ffffff;
+    --color-search-bar-bg: #000000;
+    --color-logo: #ffffff;
 
-    --color-footer-text: #333333;
+    --color-footer-text: #aaaaaa;
 
-    --color-community-label-text: #000000;
-    --color-community-label-button-text: #000000;
-    --color-community-label-button-bg: #eeeeee;
-    --color-community-label-button-highlight: #0000EE;
-    --color-community-label-button-hover: #dddddd;
-    --color-community-label-gradient-1: #ffffff;
-    --color-community-label-gradient-2: #ffffff;
+    --color-community-label-text: #ffffff;
+    --color-community-label-button-text: #ffffff;
+    --color-community-label-button-bg: #333333;
+    --color-community-label-button-highlight: #5555FF;
+    --color-community-label-button-hover: #444444;
+    --color-community-label-gradient-1: #000000;
+    --color-community-label-gradient-2: #000000;
 
-    --color-post-blog-name: #0000EE;
-    --color-reblog-attribution: #333333;
-    --color-post-link-block-subtitle: #333333;
-    --color-post-header-date-separator: #000000;
+    --color-post-blog-name: #5555FF;
+    --color-reblog-attribution: #aaaaaa;
+    --color-post-link-block-subtitle: #aaaaaa;
+    --color-post-header-date-separator: #ffffff;
 
-    --color-ask-header: #000000;
-    --color-ask-bg: #f8f8f8;
+    --color-ask-header: #ffffff;
+    --color-ask-bg: #111111;
 
-    --color-post-img-alt-text-widget-bg: #eeeeee;
-    --color-post-img-alt-text-widget-text: #000000;
+    --color-post-img-alt-text-widget-bg: #222222;
+    --color-post-img-alt-text-widget-text: #ffffff;
 
-    --color-poll-text-color: #000000;
-    --color-poll-winner-bg: #cccccc;
-    --color-poll-proportion-bar-bg: #eeeeee;
-    --color-poll-choice-bg: #ffffff;
+    --color-poll-text-color: #ffffff;
+    --color-poll-winner-bg: #333333;
+    --color-poll-proportion-bar-bg: #222222;
+    --color-poll-choice-bg: #000000;
 
-    --color-post-reveal-truncated-content-button: #0000EE;
-    --color-post-reveal-truncated-content-button-hover: #0000EE;
+    --color-post-reveal-truncated-content-button: #5555FF;
+    --color-post-reveal-truncated-content-button-hover: #5555FF;
 
-    --color-post-footer: #333333;
-    --color-post-footer-post-interaction: #333333;
-    --color-post-tag-bg: #eeeeee;
-    --color-post-tag-hover: #dddddd;
+    --color-post-footer: #aaaaaa;
+    --color-post-footer-post-interaction: #aaaaaa;
+    --color-post-tag-bg: #333333;
+    --color-post-tag-hover: #444444;
 
-    --color-trail-post-separator: #000000;
+    --color-trail-post-separator: #ffffff;
 
-    --color-post-notes-viewer-nav-bar-bg: #ffffff;
-    --color-post-notes-viewer-nav-bar-item: #000000;
-    --color-read-more-text: #0000EE;
+    --color-post-notes-viewer-nav-bar-bg: #000000;
+    --color-post-notes-viewer-nav-bar-item: #ffffff;
+    --color-read-more-text: #5555FF;
 
-    --color-audio-controls-bg: #eeeeee;
-    --color-audio-play-button-bg: #ffffff;
-    --color-audio-play-button-icon-fill: #000000;
+    --color-audio-controls-bg: #222222;
+    --color-audio-play-button-bg: #000000;
+    --color-audio-play-button-icon-fill: #ffffff;
 
-    --color-text-link: #0000EE;
-    --color-text-link-hover: #0000EE;
-    --color-text-hashtag: #0000EE;
-    --color-text-hashtag-hover: #0000EE;
+    --color-text-link: #5555FF;
+    --color-text-link-hover: #5555FF;
+    --color-text-hashtag: #5555FF;
+    --color-text-hashtag-hover: #5555FF;
 
-    --color-reblog-note-separator: #000000;
+    --color-reblog-note-separator: #ffffff;
 
-    --color-primary-button-bg: #ffffff;
-    --color-primary-button-hover: #eeeeee;
-    --color-primary-button-text: #000000;
+    --color-primary-button-bg: #000000;
+    --color-primary-button-hover: #222222;
+    --color-primary-button-text: #ffffff;
 
-    --color-secondary-button-bg: #ffffff;
-    --color-secondary-button-hover: #eeeeee;
-    --color-button-secondary-text: #000000;
+    --color-secondary-button-bg: #000000;
+    --color-secondary-button-hover: #222222;
+    --color-button-secondary-text: #ffffff;
 
-    --color-tertiary-button-color: #000000;
+    --color-tertiary-button-color: #ffffff;
 
-    --color-dropdown-menu-bg: #ffffff;
-    --color-dropdown-action-select: #ffffff;
-    --color-dropdown-action-hover: #eeeeee;
-    --color-control-bar-action-text: #000000;
-    --color-dropdown-menu-item-selected: #eeeeee;
-    --color-dropdown-menu-item-hover: #eeeeee;
+    --color-dropdown-menu-bg: #000000;
+    --color-dropdown-action-select: #000000;
+    --color-dropdown-action-hover: #222222;
+    --color-control-bar-action-text: #ffffff;
+    --color-dropdown-menu-item-selected: #222222;
+    --color-dropdown-menu-item-hover: #222222;
 
-    --color-blog-header-blog-name: #000000;
+    --color-blog-header-blog-name: #ffffff;
 
-    --tumblr-signpost-bg: #ffffff;
-    --tumblr-signpost-border: #000000;
+    --tumblr-signpost-bg: #000000;
+    --tumblr-signpost-border: #ffffff;
 
-    --color-alert-show-error-details: #333333;
-    --color-alert-show-error-details-hover: #0000EE;
+    --color-alert-show-error-details: #aaaaaa;
+    --color-alert-show-error-details-hover: #5555FF;
 }
+
 
 
 html, body, .container {
@@ -127,12 +129,12 @@ img {
 }
 
 a, a:visited {
-    color: #0000EE;
+    color: #5555FF;
     text-decoration: none;
 }
 
 a:hover, a:active {
-    color: #0000EE;
+    color: #5555FF;
     text-decoration: underline;
 }
 
@@ -162,7 +164,7 @@ a:hover, a:active {
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    background: #ffffff; border: 1px solid #000;
+    background: #000000; border: 1px solid #333;
     border-bottom: 1px solid #000;
     padding: 12px 20px 0;
 }
@@ -186,43 +188,22 @@ div.center-section {
 a.logo {
     font-size: 16px;
     font-weight: 700;
-    color: #0000EE;
+    color: #5555FF;
     letter-spacing: -0.3px;
 }
 
 a.logo:hover {
-    color: #0000EE;
+    color: #5555FF;
     text-decoration: none;
 }
 
-.search-bar {
-    display: flex;
-    width: 100%;
-    
-    padding: 6px 10px;
-    background: #f4f4f4;
-    border: 1px solid #000;
-    
-}
+.search-bar { display: flex; width: 100%; gap: 10px; }
 
-.search-bar input {
-    width: 100%;
-    text-indent: 6px;
-    border: 0;
-    color: #000000;
-    background: none;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-}
 
-.search-bar input:focus {
-    outline: 0;
-}
 
-.search-bar:focus-within {
-    border-color: #0000EE;
-    background-color: #141414;
-}
+
+
+
 
 .search-bar .icon path {
     fill: #aaaaaa;
@@ -240,12 +221,12 @@ a.logo:hover {
 }
 
 .nav-tab:hover {
-    background: #eeeeee;
+    background: #222222;
 }
 
 .selected-tab {
-    border-bottom-color: #0000EE;
-    background: #f4f4f4;
+    border-bottom-color: #5555FF;
+    background: #111111;
 }
 
 .nav-tab svg {
@@ -295,9 +276,7 @@ a.logo:hover {
 }
 
 @media screen and (min-width: 1680px) {
-    .search-bar {
-        width: 380px;
-    }
+    .search-bar { display: flex; width: 100%; gap: 10px; }
 }
 
 .timeline, .blog-posts {
@@ -314,54 +293,11 @@ a.logo:hover {
     padding: 0 20px;
 }
 
-.button {
-    display: inline-block;
-    padding: 7px 14px;
-    font-weight: 600;
-    font-size: 12px;
-    border: 1px solid #000;
-    
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    background: #ffffff; color: #000000; border: 1px solid #000000;
-    color: #000000;
-    
-}
 
-.button:hover {
-    background: #0055aa;
-    border-color: #0000EE;
-    color: #000000;
-    text-decoration: none;
-}
 
-.primary.button, a.primary.button {
-    color: #000000;
-    background: #ffffff; color: #000000; border: 1px solid #000000;
-    border-color: #0066cc;
-}
 
-.primary.button:hover {
-    background: #0055aa;
-    color: #000000;
-}
 
-.secondary.button {
-    color: #000000;
-    background: #eeeeee;
-    border-color: #444444;
-}
 
-.secondary.button:hover {
-    background: #cccccc;
-}
-
-.next-page {
-    padding: 8px 0px;
-    font-size: 13px;
-    width: 100%;
-    
-}
 
 @media screen and (min-width: 768px) {
     .paging {
@@ -386,8 +322,8 @@ a.logo:hover {
 .control-bar-action {
     display: flex;
     align-items: center;
-    background: #ffffff; border: 1px solid #000;
-    color: #000000;
+    background: #000000; border: 1px solid #333;
+    color: #ffffff;
     height: 34px;
     padding: 4px 10px;
     font-size: 12px;
@@ -400,8 +336,8 @@ a.logo:hover {
 }
 
 li.control-bar-action:hover {
-    background: #eeeeee;
-    border-color: #0000EE;
+    background: #222222;
+    border-color: #5555FF;
 }
 
 .control-bar-action > span > svg {
@@ -415,7 +351,7 @@ li.control-bar-action:hover {
     top: 40px;
     padding: 4px 0;
     list-style: None;
-    background: #ffffff; border: 1px solid #000;
+    background: #000000; border: 1px solid #333;
     border: 1px solid #000;
     
     left: 50%;
@@ -430,22 +366,22 @@ li.control-bar-action:hover {
     display: flex;
     padding: 8px 16px;
     white-space: nowrap;
-    color: #0000EE;
+    color: #5555FF;
 }
 
 .control-bar-dropdown-menu li > a:hover {
-    background: #eeeeee;
-    color: #0000EE;
+    background: #222222;
+    color: #5555FF;
 }
 
 .control-bar-dropdown-menu .selected {
-    background: #eeeeee;
-    color: #0000EE;
+    background: #222222;
+    color: #5555FF;
 }
 
 .active-dropdown-menu {
-    background: #eeeeee;
-    border-color: #0000EE;
+    background: #222222;
+    border-color: #5555FF;
 }
 
 .active-dropdown-menu .control-bar-dropdown-menu {
@@ -473,7 +409,7 @@ li.no-js .control-bar-dropdown-menu {
 }
 
 .page-footer a {
-    color: #0000EE;
+    color: #5555FF;
     text-decoration: underline;
 }
 
@@ -491,7 +427,7 @@ li.no-js .control-bar-dropdown-menu {
     padding: 16px 20px;
     
     border: 1px solid #000;
-    background: #ffffff; border: 1px solid #000;
+    background: #000000; border: 1px solid #333;
 }
 
 /* Custom scrollbar */
@@ -503,7 +439,7 @@ li.no-js .control-bar-dropdown-menu {
     background: #1e1e1e;
 }
 ::-webkit-scrollbar-thumb {
-    background: #cccccc;
+    background: #333333;
     
 }
 ::-webkit-scrollbar-thumb:hover {

@@ -11,16 +11,16 @@
         {%- if blog.blog_info.title -%} <h1 id="blog-title">{{blog.blog_info.title | e}}</h1> {%- endif -%}
         <div style="display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap;">
             <p class="blog-name" style="margin: 0;"><a href="/{{blog.blog_info.name | e}}">@{{blog.blog_info.name | e}}</a></p>
-            <a href="/{{blog.blog_info.name | e}}/archive" class="button" style="padding: 2px 8px; font-size: 0.8em; text-decoration: none; background: #fff; color: #000; border: 1px solid #000;">Go to Timeline</a>
+            <a href="/{{blog.blog_info.name | e}}/archive" class="button" >Go to Timeline</a>
         </div>
         
         <div id="blog-description">
             {{- content_tag -}}
         </div>
 
-        <details style="margin-top: 15px; font-size: 0.85em; text-align: left; background: #fff; padding: 10px; border: 1px solid #000; width: 100%; box-sizing: border-box;">
-            <summary style="cursor: pointer; color: #000; font-weight: bold;">Blog Metadata & Info</summary>
-            <div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: #000;">
+        <details>
+            <summary>Blog Metadata & Info</summary>
+            <div>
                 <div><strong>ID / UUID:</strong> {{ blog.blog_info.uuid }}</div>
                 <div><strong>Theme Font:</strong> {{ blog.blog_info.theme.body_font | default('Default') }}</div>
                 <div><strong>Adult Content:</strong> {{ 'Yes' if blog.blog_info.is_adult else 'No' }}</div>
