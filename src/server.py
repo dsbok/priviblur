@@ -6,9 +6,7 @@ import functools
 import sanic
 import aiohttp
 import orjson
-import babel.numbers
-import babel.dates
-import babel.lists
+
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes, hyperblur_extractor, preferences, helpers, exceptions
@@ -191,22 +189,7 @@ async def initialize(app):
         main_request_timeout=hyperblur_backend.main_response_timeout, json_loads=orjson.loads
     )
 
-    media_request_headers = {
-        "user-agent": hyperblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
-        "accept-encoding": "gzip, deflate",
-        "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
-        "accept-language": "en-US,en;q=0.5",
-        "connection": "keep-alive",
-        "te": "trailers",
-        "referer": "https://www.tumblr.com/",
-    }
 
-    media_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
-    app.ctx.MediaClient = aiohttp.ClientSession(
-        headers=media_request_headers,
-        timeout=aiohttp.ClientTimeout(hyperblur_backend.image_response_timeout),
-        connector=media_connector,
-    )
 
     at_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
     app.ctx.TumblrAtClient = aiohttp.ClientSession(
@@ -226,10 +209,10 @@ async def initialize(app):
     app.ext.environment.filters["remove_query_params"] = helpers.remove_query_params
     app.ext.environment.filters["deseq_urlencode"] = helpers.deseq_urlencode
     app.ext.environment.filters["ensure_single_prefix_slash"] = helpers.prefix_slash_in_url_if_missing
-    app.ext.environment.filters["format_decimal"] = babel.numbers.format_decimal
-    app.ext.environment.filters["format_date"] = babel.dates.format_date
-    app.ext.environment.filters["format_datetime"] = babel.dates.format_datetime
-    app.ext.environment.filters["format_list"] = babel.lists.format_list
+    app.ext.environment.filters["format_decimal"] = lambda x, **kw: f"{x:,}"
+    app.ext.environment.filters["format_date"] = lambda d, **kw: d.strftime('%b %d, %Y')
+    app.ext.environment.filters["format_datetime"] = lambda d, **kw: d.strftime('%b %d, %Y %H:%M')
+    app.ext.environment.filters["format_list"] = lambda l, **kw: ", ".join(map(str, l))
 
     app.ext.environment.globals["translate"] = translate_english
     app.ext.environment.globals["url_handler"] = helpers.url_handler
@@ -246,7 +229,7 @@ async def main_startup_listener(app):
 
 @app.listener("after_server_stop")
 async def cleanup(app, loop):
-    await app.ctx.MediaClient.close()
+
     await app.ctx.TumblrAtClient.close()
     await app.ctx.TumblrAPI.client.close()
 

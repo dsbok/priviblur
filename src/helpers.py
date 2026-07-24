@@ -56,19 +56,10 @@ def url_handler(url: str | urllib.parse.ParseResult):
                     hostname = after_scheme
                     path = ""
 
-                if hostname.endswith(".media.tumblr.com"):
-                    sub_domains = hostname.split(".")
-                    if sub_domains[1] == "media":
-                        return f"/tblr/media/{sub_domains[0]}{path}"
-                    elif sub_domains[0] == "www" and sub_domains[2] == "media":
-                        return f"/tblr/media/{sub_domains[1]}{path}"
-                elif hostname.endswith("assets.tumblr.com"):
-                    return f"/tblr/assets{path}"
-                elif hostname.endswith("static.tumblr.com"):
-                    return f"/tblr/static{path}"
-                elif hostname.startswith("a."):
-                    return f"/tblr/a{path}"
-                elif hostname.endswith("tumblr.com"):
+                if hostname.endswith(".media.tumblr.com") or hostname.endswith("assets.tumblr.com") or hostname.endswith("static.tumblr.com") or hostname.startswith("a."):
+                    return url
+
+                if hostname.endswith("tumblr.com"):
                     sub_domains = hostname.split(".")
                     potential_blog_name = sub_domains[1] if sub_domains[0] == "www" else sub_domains[0]
                     if potential_blog_name != "tumblr":
@@ -96,22 +87,11 @@ def url_handler(url: str | urllib.parse.ParseResult):
     except AttributeError:
         pass
 
-    if hostname.endswith("tumblr.com"):
-        if hostname.endswith(".media.tumblr.com"):
-            sub_domains = hostname.split(".")
-            if sub_domains[1] == "media":
-                return f"/tblr/media/{sub_domains[0]}{url.path}"
-            elif sub_domains[0] == "www" and sub_domains[2] == "media":
-                return f"/tblr/media/{sub_domains[1]}{url.path}"
+    if hostname.endswith(".media.tumblr.com") or hostname.endswith("assets.tumblr.com") or hostname.endswith("static.tumblr.com") or hostname.startswith("a."):
+        return url.geturl()
 
-        if hostname.endswith("assets.tumblr.com"):
-            return f"/tblr/assets{url.path}"
-        elif hostname.endswith("static.tumblr.com"):
-            return f"/tblr/static{url.path}"
-        elif hostname.startswith("a."):
-            return f"/tblr/a{url.path}"
-        else:
-            sub_domains = hostname.split(".")
+    if hostname.endswith("tumblr.com"):
+        sub_domains = hostname.split(".")
             potential_blog_name = sub_domains[1] if sub_domains[0] == "www" else sub_domains[0]
 
             if potential_blog_name != "tumblr":

@@ -55,115 +55,47 @@ async def _main_explore(request):
     return sanic.redirect(request.app.url_for("explore._trending"))
 
 @explore.get("/trending")
-@explore.get("/trending/rss", ctx_rss=True, name="_trending_rss")
 async def _trending(request):
     return await _handle_explore(request, "explore._trending")
 
 @explore.get("/today")
-@explore.get("/today/rss", ctx_rss=True, name="_today_rss")
 async def _today(request):
     return await _handle_explore(request, "explore._today")
 
 @explore.get("/text")
-@explore.get("/text/rss", ctx_rss=True, name="_text_rss")
 async def _text(request):
     return await _handle_explore(request, "explore._text", hyperblur_extractor.ExplorePostTypeFilters.TEXT)
 
 @explore.get("/photos")
-@explore.get("/photos/rss", ctx_rss=True, name="_photos_rss")
 async def _photos(request):
     return await _handle_explore(request, "explore._photos", hyperblur_extractor.ExplorePostTypeFilters.PHOTOS)
 
 @explore.get("/gifs")
-@explore.get("/gifs/rss", ctx_rss=True, name="_gifs_rss")
 async def _gifs(request):
     return await _handle_explore(request, "explore._gifs", hyperblur_extractor.ExplorePostTypeFilters.GIFS)
 
 @explore.get("/quotes")
-@explore.get("/quotes/rss", ctx_rss=True, name="_quotes_rss")
 async def _quotes(request):
     return await _handle_explore(request, "explore._quotes", hyperblur_extractor.ExplorePostTypeFilters.QUOTES)
 
 @explore.get("/chats")
-@explore.get("/chats/rss", ctx_rss=True, name="_chats_rss")
 async def _chats(request):
     return await _handle_explore(request, "explore._chats", hyperblur_extractor.ExplorePostTypeFilters.CHATS)
 
 @explore.get("/audio")
-@explore.get("/audio/rss", ctx_rss=True, name="_audio_rss")
 async def _audio(request):
     return await _handle_explore(request, "explore._audio", hyperblur_extractor.ExplorePostTypeFilters.AUDIO)
 
 @explore.get("/video")
-@explore.get("/video/rss", ctx_rss=True, name="_video_rss")
 async def _video(request):
     return await _handle_explore(request, "explore._video", hyperblur_extractor.ExplorePostTypeFilters.VIDEO)
 
 @explore.get("/asks")
-@explore.get("/asks/rss", ctx_rss=True, name="_asks_rss")
 async def _asks(request):
     return await _handle_explore(request, "explore._asks", hyperblur_extractor.ExplorePostTypeFilters.ASKS)
 
 
-# 3. Media Blueprint
-media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
 
-async def get_media(request, client: aiohttp.ClientSession, path_to_request, additional_headers=None, base_url=""):
-    url = f"{base_url}/{path_to_request}"
-    try:
-        async with client.get(url, headers=additional_headers) as tumblr_response:
-            hyperblur_response_headers = {}
-            for header_key, header_value in tumblr_response.headers.items():
-                if header_key.lower() not in request.app.ctx.BLACKLIST_RESPONSE_HEADERS:
-                    hyperblur_response_headers[header_key] = header_value
-
-            if tumblr_response.status == 200:
-                hyperblur_response_headers["Cache-Control"] = "public, max-age=31536000, immutable"
-            elif tumblr_response.status == 301:
-                if location := hyperblur_response_headers.get("location"):
-                    location = request.app.ctx.URL_HANDLER(location)
-                    if not location.startswith("/"):
-                        raise exceptions.TumblrInvalidRedirect()
-                    return sanic.redirect(location)
-            elif tumblr_response.status in (429, 500, 502, 503, 504):
-                return sanic.response.empty(status=502)
-
-            hyperblur_response = await request.respond(headers=hyperblur_response_headers, status=tumblr_response.status)
-            try:
-                async for chunk in tumblr_response.content.iter_chunked(65536):
-                    await hyperblur_response.send(chunk)
-            except (asyncio.CancelledError, ConnectionResetError):
-                pass
-            finally:
-                await hyperblur_response.eof()
-    except (aiohttp.ClientError, asyncio.TimeoutError):
-        return sanic.response.empty(status=504)
-    except exceptions.TumblrInvalidRedirect:
-        raise
-    except Exception:
-        return sanic.response.empty(status=502)
-
-@media.get("/media/<cdn:str>/<path:path>")
-async def _media_cdn(request: sanic.Request, cdn: str, path: str):
-    client = request.app.ctx.MediaClient
-    base_url = f"https://{cdn}.media.tumblr.com"
-    additional_headers = None
-    if cdn in ("ve", "va"):
-        additional_headers = {"accept": "video/webm,video/ogg,video/*;q=0.9, application/ogg;q=0.7,audio/*;q=0.6,*/*;q=0.5"}
-    return await get_media(request, client, path, additional_headers=additional_headers, base_url=base_url)
-
-@media.get(r"/a/<path:path>")
-async def _a_media(request: sanic.Request, path: str):
-    additional_headers = {"accept": "audio/webm,audio/ogg,audio/wav,audio/*;q=0.9,application/ogg;q=0.7,video/*;q=0.6,*/*;q=0.5"}
-    return await get_media(request, request.app.ctx.MediaClient, path, additional_headers=additional_headers, base_url="https://a.tumblr.com")
-
-@media.get(r"/assets/<path:path>")
-async def _tb_assets(request: sanic.Request, path: str):
-    return await get_media(request, request.app.ctx.MediaClient, path, base_url="https://assets.tumblr.com")
-
-@media.get(r"/static/<path:path>")
-async def _tb_static(request: sanic.Request, path: str):
-    return await get_media(request, request.app.ctx.MediaClient, path, base_url="https://static.tumblr.com")
 
 
 # 4. Miscellaneous Blueprint
@@ -182,7 +114,7 @@ async def _at_links(request: sanic.Request, path: str):
 async def _post_lookup(request: sanic.Request, post_id: int):
     url = f"https://www.tumblr.com/post/{post_id}"
     try:
-        async with request.app.ctx.MediaClient.head(url, allow_redirects=False) as response:
+        async with request.app.ctx.TumblrAPI.client.head(url, allow_redirects=False) as response:
             if response.status in (301, 302, 307, 308) and "location" in response.headers:
                 location_url = response.headers["location"]
                 parsed = urllib.parse.urlparse(location_url)
@@ -214,7 +146,6 @@ async def query_param_redirect(request: sanic.Request):
     return sanic.redirect(request.app.url_for("explore._trending"))
 
 @search.get("/<query:str>", name="_main")
-@search.get("/<query:str>/rss", name="_main_rss", ctx_rss=True, ctx_template="timeline")
 async def _main_search(request: sanic.Request, query: str):
     query = urllib.parse.unquote(query)
     time_filter = request.args.get("t")
@@ -224,7 +155,6 @@ async def _main_search(request: sanic.Request, query: str):
     return await _render_search(request, timeline, query, time_filter=time_filter, sort_by="popular", post_filter=None)
 
 @search.get("/<query:str>/recent")
-@search.get("/<query:str>/recent/rss", name="_sort_by_search_rss", ctx_rss=True, ctx_template="timeline")
 async def _sort_by_search(request: sanic.Request, query: str):
     query = urllib.parse.unquote(query)
     time_filter = request.args.get("t")
@@ -234,12 +164,10 @@ async def _sort_by_search(request: sanic.Request, query: str):
     return await _render_search(request, timeline, query, time_filter=time_filter, sort_by="recent", post_filter=None)
 
 @search.get("/<query:str>/<post_filter:str>")
-@search.get("/<query:str>/<post_filter:str>/rss", name="_filter_by_search_rss", ctx_rss=True, ctx_template="timeline")
 async def _filter_by_search(request: sanic.Request, query: str, post_filter: str):
     return await _request_search_filter_post(request, query, post_filter, latest=False)
 
 @search.get("/<query:str>/recent/<post_filter:str>")
-@search.get("/<query:str>/recent/<post_filter:str>/rss", name="_sort_by_and_filter_search_rss", ctx_rss=True, ctx_template="timeline")
 async def _sort_by_and_filter_search(request: sanic.Request, query: str, post_filter: str):
     return await _request_search_filter_post(request, query, post_filter, latest=True)
 
@@ -291,7 +219,6 @@ async def _render_search(request, timeline, query, **kwargs):
 tagged = sanic.Blueprint("tagged", url_prefix="/tagged")
 
 @tagged.get("/<tag:str>")
-@tagged.get("/<tag:str>/rss", name="_main_rss", ctx_rss=True, ctx_template="timeline")
 async def _main_tagged(request: sanic.Request, tag: str):
     tag = urllib.parse.unquote(tag)
     sort_by = request.args.get("sort")
@@ -316,7 +243,6 @@ async def _main_tagged(request: sanic.Request, tag: str):
 blogs = sanic.Blueprint("blogs", url_prefix="")
 
 @blogs.get("/")
-@blogs.get("rss", name="_blog_posts_rss", ctx_rss=True)
 async def _blog_posts(request: sanic.Request, blog: str):
     blog = urllib.parse.unquote(blog)
     continuation = urllib.parse.unquote(request.args["continuation"]) if request.args.get("continuation") else None
@@ -327,7 +253,6 @@ async def _blog_posts(request: sanic.Request, blog: str):
     return await request.app.ctx.render("blog/blog", context={"app": request.app, "blog": blog_timeline})
 
 @blogs.get("/tagged/<tag:str>")
-@blogs.get("/tagged/<tag:str>/rss", name="_blog_tags_rss", ctx_rss=True)
 async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     blog = urllib.parse.unquote(blog)
     tag = urllib.parse.unquote(tag)
@@ -338,7 +263,6 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     return await request.app.ctx.render("blog/blog", context={"app": request.app, "blog": blog_timeline, "tag": tag})
 
 @blogs.get("/search/<query:str>")
-@blogs.get("/search/<query:str>/rss", name="_blog_search_rss", ctx_rss=True)
 async def _blog_search(request: sanic.Request, blog: str, query: str):
     blog = urllib.parse.unquote(blog)
     query = urllib.parse.unquote(query)
@@ -426,9 +350,6 @@ async def handle_post_args(request):
     fetch_polls = args.get("fetch_polls")
     jinja_context["request_poll_data"] = bool(fetch_polls and sanic.utils.str_to_bool(fetch_polls))
 
-    if (rss_feed := args.get("rss_feed")) and sanic.utils.str_to_bool(rss_feed):
-        request.ctx.rss = True
-        request.ctx.page_url = f"{request.app.ctx.HYPERBLUR_CONFIG.deployment.domain or ''}{request.ctx.post_path}"
 
     if note_type := args.get("note_viewer"):
         note_type = getattr(PostNoteTypes, note_type.upper(), None)
@@ -531,4 +452,4 @@ async def poll_results(request, blog: str, post_id: int, poll_id: int):
     return sanic.response.json(raw["response"], headers={"Cache-Control": "max-age=600, immutable"})
 
 
-BLUEPRINTS = [assets, explore, search, tagged, media, miscellaneous, blogs_group, api_misc]
+BLUEPRINTS = [assets, explore, search, tagged, miscellaneous, blogs_group, api_misc]
